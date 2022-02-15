@@ -55,7 +55,7 @@ struct SetTrainListItem: View {
             
         } else {
             
-            return Color(UIColor.green)
+            return Color(UIColor.systemGreen)
             
         }
         

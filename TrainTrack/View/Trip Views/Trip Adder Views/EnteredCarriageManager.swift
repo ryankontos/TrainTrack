@@ -15,6 +15,10 @@ class EnteredCarriageManager: ObservableObject {
     
     @Published var showCamera = false
     
+    init(camera: Bool) {
+        showCamera = camera
+    }
+    
     func gotFullCarriageCodeExternally(code: String) {
         
         DispatchQueue.main.async {

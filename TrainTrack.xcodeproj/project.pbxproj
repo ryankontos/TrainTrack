@@ -44,42 +44,8 @@
 		BF7DDF2125663016007885BA /* AllTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7DDF2025663016007885BA /* AllTripsView.swift */; };
 		BF85B71C2567FB00007CF1B7 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = BF85B71B2567FB00007CF1B7 /* SPAlert */; };
 		BF85B71F2568980F007CF1B7 /* TrainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85B71E2568980E007CF1B7 /* TrainHeaderView.swift */; };
-		BF99EFE9279D955700C41531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF99EFE8279D955700C41531 /* Assets.xcassets */; };
-		BF99EFEF279D955700C41531 /* TrainTrack Watch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BF99EFEE279D955700C41531 /* TrainTrack Watch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BF99EFF4279D955700C41531 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99EFF3279D955700C41531 /* ContentView.swift */; };
-		BF99EFF6279D955700C41531 /* TrainTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99EFF5279D955700C41531 /* TrainTrackApp.swift */; };
-		BF99EFF8279D955700C41531 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99EFF7279D955700C41531 /* ComplicationController.swift */; };
-		BF99EFFA279D955700C41531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF99EFF9279D955700C41531 /* Assets.xcassets */; };
-		BF99EFFD279D955700C41531 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF99EFFC279D955700C41531 /* Preview Assets.xcassets */; };
-		BF99F001279D955700C41531 /* TrainTrack Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BF99EFE6279D955600C41531 /* TrainTrack Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BF99F00C279D95B300C41531 /* TTCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99F00B279D95B300C41531 /* TTCloudKit.swift */; };
-		BF99F00E279D969000C41531 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFACA222566403900C11400 /* LocationManager.swift */; };
-		BF99F00F279D969400C41531 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AB4257B38A20003A4AF /* Date.swift */; };
-		BF99F010279D969700C41531 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AAC257B2AC00003A4AF /* Trip.swift */; };
-		BF99F011279D969700C41531 /* TripFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE578912566B03700D4E3C7 /* TripFetcher.swift */; };
-		BF99F012279D969700C41531 /* TripAdder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A6842566247400BA4981 /* TripAdder.swift */; };
-		BF99F013279D969B00C41531 /* TrainLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A88D2567CE1D00652311 /* TrainLookup.swift */; };
-		BF99F014279D969B00C41531 /* TrainSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A52025668B6400535458 /* TrainSets.swift */; };
-		BF99F015279D969B00C41531 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A51A256683B800535458 /* Train.swift */; };
-		BF99F016279D969B00C41531 /* TrainFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2A6B825666D1300897B2A /* TrainFetcher.swift */; };
-		BF99F017279D969B00C41531 /* TrainType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A51D2566840200535458 /* TrainType.swift */; };
-		BF99F018279D96A800C41531 /* TTCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99F00B279D95B300C41531 /* TTCloudKit.swift */; };
-		BF99F01A279D96BB00C41531 /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = BF99F019279D96BB00C41531 /* Kanna */; };
-		BF99F01B279D96D200C41531 /* TrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF20A66C25661FBD00BA4981 /* TrainTrack.xcdatamodeld */; };
-		BF99F01C279D978000C41531 /* SetsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A5232566912600535458 /* SetsList.swift */; };
-		BF99F01D279D978700C41531 /* SetsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A526256692A300535458 /* SetsListItem.swift */; };
-		BF99F01E279D978D00C41531 /* ProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AB9257B3F9A0003A4AF /* ProgressRing.swift */; };
-		BF99F01F279D979600C41531 /* SetTrainList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BCC3D2566A4D500C1460E /* SetTrainList.swift */; };
-		BF99F020279D97A300C41531 /* TrainDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A8962567D45200652311 /* TrainDetailView.swift */; };
-		BF99F021279D97A800C41531 /* SetTrainListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BCC402566A4E100C1460E /* SetTrainListItem.swift */; };
-		BF99F023279D980500C41531 /* AddTripCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9F04525B13DFF00237ACA /* AddTripCapsule.swift */; };
-		BF99F024279D986200C41531 /* TrainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85B71E2568980E007CF1B7 /* TrainHeaderView.swift */; };
-		BF99F025279D989100C41531 /* LargeHeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17D9E225A81B7B0020C85A /* LargeHeaderText.swift */; };
-		BF99F026279D989C00C41531 /* TripRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2A6B125666B9200897B2A /* TripRowView.swift */; };
-		BF99F027279D98A200C41531 /* VisualTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A89E2567DFB200652311 /* VisualTrainView.swift */; };
 		BF99F029279D993A00C41531 /* TrainImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF99F028279D993A00C41531 /* TrainImages.xcassets */; };
-		BF99F02A279D993E00C41531 /* TrainImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF99F028279D993A00C41531 /* TrainImages.xcassets */; };
-		BF99F02D279D9A9500C41531 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF99F02C279D9A9500C41531 /* CloudKit.framework */; };
 		BF9DFD2825905C8D00C6CEF4 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9DFD2725905C8D00C6CEF4 /* Intents.framework */; };
 		BF9DFD2B25905C8D00C6CEF4 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9DFD2A25905C8D00C6CEF4 /* IntentHandler.swift */; };
 		BF9DFD2F25905C8D00C6CEF4 /* AddTripIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BF9DFD2625905C8C00C6CEF4 /* AddTripIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -101,20 +67,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BF99EFF0279D955700C41531 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF20A65B25661FBD00BA4981 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BF99EFED279D955700C41531;
-			remoteInfo = "TrainTrack Watch WatchKit Extension";
-		};
-		BF99EFFF279D955700C41531 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF20A65B25661FBD00BA4981 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BF99EFE5279D955600C41531;
-			remoteInfo = "TrainTrack Watch";
-		};
 		BF9DFD2D25905C8D00C6CEF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BF20A65B25661FBD00BA4981 /* Project object */;
@@ -131,20 +83,8 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				BF99F001279D955700C41531 /* TrainTrack Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF99F005279D955700C41531 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				BF99EFEF279D955700C41531 /* TrainTrack Watch WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BF9DFD3125905C9400C6CEF4 /* Embed App Extensions */ = {
@@ -168,7 +108,7 @@
 		BF14A526256692A300535458 /* SetsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsListItem.swift; sourceTree = "<group>"; };
 		BF15CF8825A88176002366B3 /* PreviewContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContextMenu.swift; sourceTree = "<group>"; };
 		BF17D9E225A81B7B0020C85A /* LargeHeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeHeaderText.swift; sourceTree = "<group>"; };
-		BF20A66325661FBD00BA4981 /* TrainTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF20A66325661FBD00BA4981 /* TrainTrack Sydney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrainTrack Sydney.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF20A66625661FBD00BA4981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF20A66825661FBD00BA4981 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BF20A66A25661FBD00BA4981 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -199,9 +139,7 @@
 		BF6C2B4E279C07B0006D2201 /* AppShortcutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcutHandler.swift; sourceTree = "<group>"; };
 		BF7DDF2025663016007885BA /* AllTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTripsView.swift; sourceTree = "<group>"; };
 		BF85B71E2568980E007CF1B7 /* TrainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainHeaderView.swift; sourceTree = "<group>"; };
-		BF99EFE6279D955600C41531 /* TrainTrack Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrainTrack Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF99EFE8279D955700C41531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BF99EFEE279D955700C41531 /* TrainTrack Watch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TrainTrack Watch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF99EFF3279D955700C41531 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BF99EFF5279D955700C41531 /* TrainTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTrackApp.swift; sourceTree = "<group>"; };
 		BF99EFF7279D955700C41531 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -240,15 +178,6 @@
 				BF6602712791623B00BC4034 /* Introspect in Frameworks */,
 				BFB2A6B625666CED00897B2A /* Kanna in Frameworks */,
 				BF20A6812566204C00BA4981 /* CloudKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF99EFEB279D955700C41531 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF99F01A279D96BB00C41531 /* Kanna in Frameworks */,
-				BF99F02D279D9A9500C41531 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,10 +383,8 @@
 		BF20A66425661FBD00BA4981 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF20A66325661FBD00BA4981 /* TrainTrack.app */,
+				BF20A66325661FBD00BA4981 /* TrainTrack Sydney.app */,
 				BF9DFD2625905C8C00C6CEF4 /* AddTripIntent.appex */,
-				BF99EFE6279D955600C41531 /* TrainTrack Watch.app */,
-				BF99EFEE279D955700C41531 /* TrainTrack Watch WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -557,9 +484,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BF20A66225661FBD00BA4981 /* TrainTrack */ = {
+		BF20A66225661FBD00BA4981 /* TrainTrack Sydney */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BF20A67A25661FC800BA4981 /* Build configuration list for PBXNativeTarget "TrainTrack" */;
+			buildConfigurationList = BF20A67A25661FC800BA4981 /* Build configuration list for PBXNativeTarget "TrainTrack Sydney" */;
 			buildPhases = (
 				BF20A65F25661FBD00BA4981 /* Sources */,
 				BF20A66025661FBD00BA4981 /* Frameworks */,
@@ -571,54 +498,16 @@
 			);
 			dependencies = (
 				BF9DFD2E25905C8D00C6CEF4 /* PBXTargetDependency */,
-				BF99F000279D955700C41531 /* PBXTargetDependency */,
 			);
-			name = TrainTrack;
+			name = "TrainTrack Sydney";
 			packageProductDependencies = (
 				BFB2A6B525666CED00897B2A /* Kanna */,
 				BF85B71B2567FB00007CF1B7 /* SPAlert */,
 				BF6602702791623B00BC4034 /* Introspect */,
 			);
 			productName = TrainTrack;
-			productReference = BF20A66325661FBD00BA4981 /* TrainTrack.app */;
+			productReference = BF20A66325661FBD00BA4981 /* TrainTrack Sydney.app */;
 			productType = "com.apple.product-type.application";
-		};
-		BF99EFE5279D955600C41531 /* TrainTrack Watch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BF99F009279D955700C41531 /* Build configuration list for PBXNativeTarget "TrainTrack Watch" */;
-			buildPhases = (
-				BF99EFE4279D955600C41531 /* Resources */,
-				BF99F005279D955700C41531 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BF99EFF1279D955700C41531 /* PBXTargetDependency */,
-			);
-			name = "TrainTrack Watch";
-			productName = "TrainTrack Watch";
-			productReference = BF99EFE6279D955600C41531 /* TrainTrack Watch.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		BF99EFED279D955700C41531 /* TrainTrack Watch WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BF99F008279D955700C41531 /* Build configuration list for PBXNativeTarget "TrainTrack Watch WatchKit Extension" */;
-			buildPhases = (
-				BF99EFEA279D955700C41531 /* Sources */,
-				BF99EFEB279D955700C41531 /* Frameworks */,
-				BF99EFEC279D955700C41531 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "TrainTrack Watch WatchKit Extension";
-			packageProductDependencies = (
-				BF99F019279D96BB00C41531 /* Kanna */,
-			);
-			productName = "TrainTrack Watch WatchKit Extension";
-			productReference = BF99EFEE279D955700C41531 /* TrainTrack Watch WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		BF9DFD2525905C8C00C6CEF4 /* AddTripIntent */ = {
 			isa = PBXNativeTarget;
@@ -649,12 +538,6 @@
 					BF20A66225661FBD00BA4981 = {
 						CreatedOnToolsVersion = 12.2;
 					};
-					BF99EFE5279D955600C41531 = {
-						CreatedOnToolsVersion = 13.2.1;
-					};
-					BF99EFED279D955700C41531 = {
-						CreatedOnToolsVersion = 13.2.1;
-					};
 					BF9DFD2525905C8C00C6CEF4 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -678,10 +561,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BF20A66225661FBD00BA4981 /* TrainTrack */,
+				BF20A66225661FBD00BA4981 /* TrainTrack Sydney */,
 				BF9DFD2525905C8C00C6CEF4 /* AddTripIntent */,
-				BF99EFE5279D955600C41531 /* TrainTrack Watch */,
-				BF99EFED279D955700C41531 /* TrainTrack Watch WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -696,24 +577,6 @@
 				BF20A67025661FC800BA4981 /* Assets.xcassets in Resources */,
 				BF23680B279D5E500007EBBB /* CameraView.storyboard in Resources */,
 				BF99F029279D993A00C41531 /* TrainImages.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF99EFE4279D955600C41531 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF99EFE9279D955700C41531 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF99EFEC279D955700C41531 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF99EFFD279D955700C41531 /* Preview Assets.xcassets in Resources */,
-				BF99EFFA279D955700C41531 /* Assets.xcassets in Resources */,
-				BF99F02A279D993E00C41531 /* TrainImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,39 +640,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF99EFEA279D955700C41531 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF99F020279D97A300C41531 /* TrainDetailView.swift in Sources */,
-				BF99F010279D969700C41531 /* Trip.swift in Sources */,
-				BF99F012279D969700C41531 /* TripAdder.swift in Sources */,
-				BF99F015279D969B00C41531 /* Train.swift in Sources */,
-				BF99F026279D989C00C41531 /* TripRowView.swift in Sources */,
-				BF99F00E279D969000C41531 /* LocationManager.swift in Sources */,
-				BF99F01C279D978000C41531 /* SetsList.swift in Sources */,
-				BF99F016279D969B00C41531 /* TrainFetcher.swift in Sources */,
-				BF99F01B279D96D200C41531 /* TrainTrack.xcdatamodeld in Sources */,
-				BF99F024279D986200C41531 /* TrainHeaderView.swift in Sources */,
-				BF99F025279D989100C41531 /* LargeHeaderText.swift in Sources */,
-				BF99F00F279D969400C41531 /* Date.swift in Sources */,
-				BF99F017279D969B00C41531 /* TrainType.swift in Sources */,
-				BF99F023279D980500C41531 /* AddTripCapsule.swift in Sources */,
-				BF99EFF6279D955700C41531 /* TrainTrackApp.swift in Sources */,
-				BF99EFF4279D955700C41531 /* ContentView.swift in Sources */,
-				BF99F021279D97A800C41531 /* SetTrainListItem.swift in Sources */,
-				BF99F027279D98A200C41531 /* VisualTrainView.swift in Sources */,
-				BF99F01D279D978700C41531 /* SetsListItem.swift in Sources */,
-				BF99EFF8279D955700C41531 /* ComplicationController.swift in Sources */,
-				BF99F018279D96A800C41531 /* TTCloudKit.swift in Sources */,
-				BF99F01E279D978D00C41531 /* ProgressRing.swift in Sources */,
-				BF99F013279D969B00C41531 /* TrainLookup.swift in Sources */,
-				BF99F011279D969700C41531 /* TripFetcher.swift in Sources */,
-				BF99F014279D969B00C41531 /* TrainSets.swift in Sources */,
-				BF99F01F279D979600C41531 /* SetTrainList.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BF9DFD2225905C8C00C6CEF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -822,16 +652,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BF99EFF1279D955700C41531 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BF99EFED279D955700C41531 /* TrainTrack Watch WatchKit Extension */;
-			targetProxy = BF99EFF0279D955700C41531 /* PBXContainerItemProxy */;
-		};
-		BF99F000279D955700C41531 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BF99EFE5279D955600C41531 /* TrainTrack Watch */;
-			targetProxy = BF99EFFF279D955700C41531 /* PBXContainerItemProxy */;
-		};
 		BF9DFD2E25905C8D00C6CEF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BF9DFD2525905C8C00C6CEF4 /* AddTripIntent */;
@@ -1019,126 +839,6 @@
 			};
 			name = Release;
 		};
-		BF99F003279D955700C41531 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
-				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = TrainTrack_Watch_WatchKit_Extension;
-				INFOPLIST_KEY_CFBundleDisplayName = "TrainTrack Watch";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = ryankontos.TrainTrack;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.3;
-			};
-			name = Debug;
-		};
-		BF99F004279D955700C41531 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
-				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = TrainTrack_Watch_WatchKit_Extension;
-				INFOPLIST_KEY_CFBundleDisplayName = "TrainTrack Watch";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = ryankontos.TrainTrack;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.3;
-			};
-			name = Release;
-		};
-		BF99F006279D955700C41531 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "TrainTrack Watch WatchKit Extension/TrainTrack Watch WatchKit Extension.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TrainTrack Watch WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "TrainTrack Watch WatchKit Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "TrainTrack Watch WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = TrainTrack_Watch_WatchKit_Extension.ComplicationController;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.3;
-			};
-			name = Debug;
-		};
-		BF99F007279D955700C41531 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "TrainTrack Watch WatchKit Extension/TrainTrack Watch WatchKit Extension.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TrainTrack Watch WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "TrainTrack Watch WatchKit Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "TrainTrack Watch WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = TrainTrack_Watch_WatchKit_Extension.ComplicationController;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.3;
-			};
-			name = Release;
-		};
 		BF9DFD3225905C9400C6CEF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1195,29 +895,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BF20A67A25661FC800BA4981 /* Build configuration list for PBXNativeTarget "TrainTrack" */ = {
+		BF20A67A25661FC800BA4981 /* Build configuration list for PBXNativeTarget "TrainTrack Sydney" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BF20A67B25661FC800BA4981 /* Debug */,
 				BF20A67C25661FC800BA4981 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BF99F008279D955700C41531 /* Build configuration list for PBXNativeTarget "TrainTrack Watch WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BF99F006279D955700C41531 /* Debug */,
-				BF99F007279D955700C41531 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BF99F009279D955700C41531 /* Build configuration list for PBXNativeTarget "TrainTrack Watch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BF99F003279D955700C41531 /* Debug */,
-				BF99F004279D955700C41531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1270,11 +952,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF85B71A2567FB00007CF1B7 /* XCRemoteSwiftPackageReference "SPAlert" */;
 			productName = SPAlert;
-		};
-		BF99F019279D96BB00C41531 /* Kanna */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BFB2A6B425666CED00897B2A /* XCRemoteSwiftPackageReference "Kanna" */;
-			productName = Kanna;
 		};
 		BFB2A6B525666CED00897B2A /* Kanna */ = {
 			isa = XCSwiftPackageProductDependency;

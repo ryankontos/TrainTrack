@@ -12,7 +12,6 @@ struct ContentView: View {
   
     @Environment(\.scenePhase) var phase
     
-     var enteredCarriageManager = EnteredCarriageManager()
     
     @State var showCamera = false
     @State var showingModal = false
@@ -60,7 +59,7 @@ struct ContentView: View {
                         ZStack {
                            
                             Circle()
-                                .foregroundColor(.blue.opacity(0.8))
+                                .foregroundColor(Color(UIColor.systemBlue).opacity(1))
                                 .frame(width: 58, height: 58)
                             
                             Image(systemName: "plus")
@@ -79,16 +78,14 @@ struct ContentView: View {
             }
            .sheet(isPresented: $showingModal, onDismiss: {
                
-               
-               enteredCarriageManager.enteredText = ""
-               enteredCarriageManager.showCamera = false
+               showCamera = false
                
            },content: {
                
                NavigationView {
                
                    EnterCarriageView(showingSheet: $showingModal)
-                       .environmentObject(enteredCarriageManager)
+                       .environmentObject(EnteredCarriageManager(camera: showCamera))
                    .navigationBarItems(leading: Button("Cancel", action: {showingModal.toggle()}))
                    .navigationViewStyle(StackNavigationViewStyle())
                    .navigationBarTitleDisplayMode(.inline)
@@ -114,7 +111,7 @@ extension ContentView: AppShortcutItemDelegate {
         }
         
         if (shortcutItem.userInfo?["name"] as? String) == "scan" {
-            enteredCarriageManager.showCamera = true
+            showCamera = true
             showingModal = true
         }
         

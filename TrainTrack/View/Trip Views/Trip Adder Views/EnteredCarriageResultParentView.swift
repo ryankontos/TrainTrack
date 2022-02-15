@@ -27,7 +27,22 @@ struct EnteredCarriageResultParentView: View {
             
         } else {
             
-            Text("No Match")
+            VStack(spacing: 13) {
+                
+                Spacer()
+                
+                Image(systemName: "nosign")
+                    .font(.system(size: 70, weight: .medium, design: .default))
+                    .foregroundColor(.secondary)
+                
+                Text("Invalid Carriage Code")
+                    .font(.system(size: 18, weight: .medium, design: .default))
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+            }
+            .edgesIgnoringSafeArea(.all)
         }
         
     }

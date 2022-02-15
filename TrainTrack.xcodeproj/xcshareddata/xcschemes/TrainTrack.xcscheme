@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BF20A66225661FBD00BA4981"
-               BuildableName = "TrainTrack.app"
-               BlueprintName = "TrainTrack"
+               BuildableName = "TrainTrack Sydney.app"
+               BlueprintName = "TrainTrack Sydney"
                ReferencedContainer = "container:TrainTrack.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BF20A66225661FBD00BA4981"
-            BuildableName = "TrainTrack.app"
-            BlueprintName = "TrainTrack"
+            BuildableName = "TrainTrack Sydney.app"
+            BlueprintName = "TrainTrack Sydney"
             ReferencedContainer = "container:TrainTrack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -84,8 +84,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BF20A66225661FBD00BA4981"
-            BuildableName = "TrainTrack.app"
-            BlueprintName = "TrainTrack"
+            BuildableName = "TrainTrack Sydney.app"
+            BlueprintName = "TrainTrack Sydney"
             ReferencedContainer = "container:TrainTrack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
