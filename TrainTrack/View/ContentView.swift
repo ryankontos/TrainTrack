@@ -99,7 +99,7 @@ struct ContentView: View {
                 }
             }
             .padding(.trailing, 20)
-            .padding(.bottom, 90)
+            .padding(.bottom, 70)
         }
         .sheet(isPresented: $showingNewTrip) {
             NavigationStack {

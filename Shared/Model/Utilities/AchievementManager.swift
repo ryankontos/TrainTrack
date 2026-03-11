@@ -95,7 +95,8 @@ final class AchievementManager {
 
     // MARK: - Evaluation
 
-    func evaluateAll(fleet: Fleet, stats: FleetStats) {
+    @discardableResult
+    func evaluateAll(fleet: Fleet, stats: FleetStats) -> [Achievement] {
         var newlyUnlocked = [Achievement]()
 
         for achievement in Self.all {
@@ -114,6 +115,8 @@ final class AchievementManager {
                 sendNotification(for: a)
             }
         }
+
+        return newlyUnlocked
     }
 
     func currentValue(for achievement: Achievement, fleet: Fleet, stats: FleetStats) -> Int {

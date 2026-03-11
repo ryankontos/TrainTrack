@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import ConfettiSwiftUI
 
 struct EnterCarriageView: View {
 
@@ -20,6 +21,8 @@ struct EnterCarriageView: View {
 
     @State private var showingSaved = false
     @State private var savedInfo: (code: String, train: String, set: String)?
+    @State private var unlockedAchievements: [AchievementManager.Achievement] = []
+    @State private var confettiCounter = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -27,7 +30,11 @@ struct EnterCarriageView: View {
             codeField
 
             if showingSaved, let info = savedInfo {
-                successOverlay(info)
+                if !unlockedAchievements.isEmpty {
+                    achievementCelebration(info)
+                } else {
+                    successOverlay(info)
+                }
             } else if manager.enteredText.isEmpty {
                 tipView
             } else {
@@ -147,6 +154,72 @@ struct EnterCarriageView: View {
         .transition(.opacity.combined(with: .scale(scale: 0.9)))
     }
 
+    // MARK: - Achievement Celebration
+
+    private func achievementCelebration(_ info: (code: String, train: String, set: String)) -> some View {
+        VStack(spacing: 20) {
+            Spacer()
+
+            Image(systemName: "trophy.fill")
+                .font(.system(size: 56))
+                .foregroundStyle(.yellow)
+                .confettiCannon(counter: $confettiCounter, num: 50, openingAngle: .degrees(0), closingAngle: .degrees(360), radius: 200, repetitions: 3, repetitionInterval: 0.7)
+
+            Text("Achievement Unlocked!")
+                .font(.title2.bold())
+
+            VStack(spacing: 12) {
+                ForEach(unlockedAchievements, id: \.id) { achievement in
+                    HStack(spacing: 12) {
+                        Image(systemName: achievement.icon)
+                            .font(.title3)
+                            .foregroundStyle(.yellow)
+                            .frame(width: 40, height: 40)
+                            .background(.yellow.opacity(0.15), in: Circle())
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(achievement.title)
+                                .font(.headline)
+                            Text(achievement.description)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal, 32)
+
+            Text(info.code)
+                .font(.subheadline.bold().monospaced())
+                .foregroundStyle(.secondary)
+
+            Text("\(info.train) · \(info.set)")
+                .font(.caption)
+                .foregroundStyle(.tertiary)
+
+            Spacer()
+
+            Button {
+                showingSheet = false
+            } label: {
+                Text("Nice!")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(.yellow, in: RoundedRectangle(cornerRadius: 14))
+                    .foregroundStyle(.black)
+            }
+            .padding(.horizontal, 32)
+            .padding(.bottom, 20)
+        }
+        .transition(.opacity.combined(with: .scale(scale: 0.9)))
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                confettiCounter += 1
+            }
+        }
+    }
+
     // MARK: - Actions
 
     private func logTopMatch() {
@@ -163,9 +236,20 @@ struct EnterCarriageView: View {
             try tripManager.addTrip(withCode: code)
             let lookup = store.findTrain(byCarriage: code.uppercased())
             savedInfo = (code.uppercased(), lookup?.train.name ?? "Unknown", lookup?.set.name ?? "")
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-            withAnimation(.easeInOut(duration: 0.25)) { showingSaved = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { showingSheet = false }
+
+            // Check for newly unlocked achievements
+            store.recomputeStats()
+            let newAchievements = AchievementManager.shared.evaluateAll(fleet: store.fleet, stats: store.stats)
+            unlockedAchievements = newAchievements
+
+            if newAchievements.isEmpty {
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                withAnimation(.easeInOut(duration: 0.25)) { showingSaved = true }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { showingSheet = false }
+            } else {
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) { showingSaved = true }
+            }
         } catch {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
