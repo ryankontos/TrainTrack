@@ -3,78 +3,77 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BF14A51B256683B800535458 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A51A256683B800535458 /* Train.swift */; };
 		BF14A51E2566840200535458 /* TrainType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A51D2566840200535458 /* TrainType.swift */; };
 		BF14A52125668B6400535458 /* TrainSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A52025668B6400535458 /* TrainSets.swift */; };
-		BF14A5242566912700535458 /* SetsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A5232566912600535458 /* SetsList.swift */; };
-		BF14A527256692A300535458 /* SetsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A526256692A300535458 /* SetsListItem.swift */; };
 		BF15CF8925A88176002366B3 /* PreviewContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15CF8825A88176002366B3 /* PreviewContextMenu.swift */; };
 		BF17D9E325A81B7B0020C85A /* LargeHeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17D9E225A81B7B0020C85A /* LargeHeaderText.swift */; };
 		BF20A66725661FBD00BA4981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A66625661FBD00BA4981 /* AppDelegate.swift */; };
 		BF20A66925661FBD00BA4981 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A66825661FBD00BA4981 /* SceneDelegate.swift */; };
-		BF20A66B25661FBD00BA4981 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A66A25661FBD00BA4981 /* ContentView.swift */; };
 		BF20A66E25661FBD00BA4981 /* TrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF20A66C25661FBD00BA4981 /* TrainTrack.xcdatamodeld */; };
 		BF20A67025661FC800BA4981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF20A66F25661FC800BA4981 /* Assets.xcassets */; };
 		BF20A67325661FC800BA4981 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF20A67225661FC800BA4981 /* Preview Assets.xcassets */; };
-		BF20A67625661FC800BA4981 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF20A67425661FC800BA4981 /* LaunchScreen.storyboard */; };
 		BF20A6812566204C00BA4981 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF20A6802566204C00BA4981 /* CloudKit.framework */; };
 		BF236800279D5B6C0007EBBB /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2367FF279D5B6C0007EBBB /* CameraView.swift */; };
 		BF236806279D5C8D0007EBBB /* VisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF236802279D5C8D0007EBBB /* VisionViewController.swift */; };
 		BF236807279D5C8D0007EBBB /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF236803279D5C8D0007EBBB /* PreviewView.swift */; };
 		BF236808279D5C8D0007EBBB /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF236804279D5C8D0007EBBB /* StringUtils.swift */; };
 		BF236809279D5C8D0007EBBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF236805279D5C8D0007EBBB /* ViewController.swift */; };
-		BF23680B279D5E500007EBBB /* CameraView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF23680A279D5E500007EBBB /* CameraView.storyboard */; };
 		BF23680D279D6E3B0007EBBB /* EnteredCarriageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23680C279D6E3B0007EBBB /* EnteredCarriageManager.swift */; };
 		BF30A88E2567CE1D00652311 /* TrainLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A88D2567CE1D00652311 /* TrainLookup.swift */; };
 		BF30A8912567D04600652311 /* EnteredCarriageResultParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A8902567D04500652311 /* EnteredCarriageResultParentView.swift */; };
 		BF30A8942567D10600652311 /* BluePillButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A8932567D10600652311 /* BluePillButtonView.swift */; };
-		BF30A8972567D45200652311 /* TrainDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A8962567D45200652311 /* TrainDetailView.swift */; };
 		BF30A89F2567DFB200652311 /* VisualTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A89E2567DFB200652311 /* VisualTrainView.swift */; };
 		BF328B6B25679E1A00203A9F /* NewTripButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF328B6A25679E1A00203A9F /* NewTripButtonView.swift */; };
+		BF351A082BC7F60700ECC9EE /* TrainDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF351A072BC7F60700ECC9EE /* TrainDataDownloader.swift */; };
+		BF3765F32BD6230100B6F698 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3765F22BD6230100B6F698 /* NotificationView.swift */; };
+		BF397F2029681A8C00A51D45 /* CompletedSetAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF397F1F29681A8C00A51D45 /* CompletedSetAlertView.swift */; };
+		BF397F2329681EB100A51D45 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = BF397F2229681EB100A51D45 /* ConfettiSwiftUI */; };
+		BF41DEC028F852B8004B608F /* CarriageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41DEBF28F852B8004B608F /* CarriageInfoView.swift */; };
 		BF4AC6682567B72F00B4ED6C /* EnterCarriageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4AC6672567B72F00B4ED6C /* EnterCarriageView.swift */; };
-		BF4BCC3E2566A4D500C1460E /* SetTrainList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BCC3D2566A4D500C1460E /* SetTrainList.swift */; };
-		BF4BCC412566A4E100C1460E /* SetTrainListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BCC402566A4E100C1460E /* SetTrainListItem.swift */; };
+		BF51B5072BD649870056CE7E /* NotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF51B5062BD649870056CE7E /* NotificationSender.swift */; };
+		BF5386D72BCBEB2400263314 /* CarriageInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5386D62BCBEB2400263314 /* CarriageInfoProvider.swift */; };
+		BF5386DB2BCC43D200263314 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5386DA2BCC43D200263314 /* HomeView.swift */; };
+		BF5386DD2BCC492000263314 /* TotalTripsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5386DC2BCC492000263314 /* TotalTripsChartView.swift */; };
+		BF5386DE2BCC494100263314 /* SetsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A5232566912600535458 /* SetsList.swift */; };
+		BF5386DF2BCC49C400263314 /* SetsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14A526256692A300535458 /* SetsListItem.swift */; };
+		BF5386E02BCC49C900263314 /* SetTrainListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BCC402566A4E100C1460E /* SetTrainListItem.swift */; };
+		BF5386E12BCC49CC00263314 /* SetTrainList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BCC3D2566A4D500C1460E /* SetTrainList.swift */; };
+		BF58CEF02AC6C3CE0051499E /* TrainTrackAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF58CEEF2AC6C3CE0051499E /* TrainTrackAppIntent.swift */; };
 		BF6602712791623B00BC4034 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = BF6602702791623B00BC4034 /* Introspect */; };
 		BF6C2B4F279C07B0006D2201 /* AppShortcutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C2B4E279C07B0006D2201 /* AppShortcutHandler.swift */; };
-		BF7DDF1725662AB6007885BA /* TripAdder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A6842566247400BA4981 /* TripAdder.swift */; };
-		BF7DDF2125663016007885BA /* AllTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7DDF2025663016007885BA /* AllTripsView.swift */; };
-		BF85B71C2567FB00007CF1B7 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = BF85B71B2567FB00007CF1B7 /* SPAlert */; };
-		BF85B71F2568980F007CF1B7 /* TrainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85B71E2568980E007CF1B7 /* TrainHeaderView.swift */; };
+		BF7156982BCF6D26000A8D51 /* TrainCarriageTripCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7156972BCF6D26000A8D51 /* TrainCarriageTripCountView.swift */; };
+		BF7BC0AB2BC943DC0035DA63 /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF351A052BC7F31800ECC9EE /* DataTestView.swift */; };
+		BF7BC0AC2BC944C40035DA63 /* AllTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7DDF2025663016007885BA /* AllTripsView.swift */; };
+		BF7BC0AE2BC944DF0035DA63 /* TripRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2A6B125666B9200897B2A /* TripRowView.swift */; };
+		BF7BC0BB2BC9524F0035DA63 /* TrainData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF7BC0B92BC9524F0035DA63 /* TrainData.xcdatamodeld */; };
+		BF7DDF1725662AB6007885BA /* TripManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A6842566247400BA4981 /* TripManager.swift */; };
+		BF85B71C2567FB00007CF1B7 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = BF85B71B2567FB00007CF1B7 /* SPAlert */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BF89B9012906A0EA00BFEB85 /* RoundedCornersShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89B9002906A0EA00BFEB85 /* RoundedCornersShape.swift */; };
 		BF99F00C279D95B300C41531 /* TTCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99F00B279D95B300C41531 /* TTCloudKit.swift */; };
 		BF99F029279D993A00C41531 /* TrainImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF99F028279D993A00C41531 /* TrainImages.xcassets */; };
-		BF9DFD2825905C8D00C6CEF4 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9DFD2725905C8D00C6CEF4 /* Intents.framework */; };
-		BF9DFD2B25905C8D00C6CEF4 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9DFD2A25905C8D00C6CEF4 /* IntentHandler.swift */; };
-		BF9DFD2F25905C8D00C6CEF4 /* AddTripIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BF9DFD2625905C8C00C6CEF4 /* AddTripIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BF9DFD3825905CEA00C6CEF4 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BF9DFD3725905CEA00C6CEF4 /* Intents.intentdefinition */; };
-		BF9DFD3D25905DF000C6CEF4 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BF9DFD3725905CEA00C6CEF4 /* Intents.intentdefinition */; };
-		BF9DFD4225905E5300C6CEF4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF20A6802566204C00BA4981 /* CloudKit.framework */; };
+		BF9DF47D2C9D6FAB007AECA0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9DF47C2C9D6FAB007AECA0 /* DashboardView.swift */; };
 		BFB14AAD257B2AC00003A4AF /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AAC257B2AC00003A4AF /* Trip.swift */; };
 		BFB14AB2257B30430003A4AF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AB1257B30430003A4AF /* MapView.swift */; };
 		BFB14AB5257B38A30003A4AF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AB4257B38A20003A4AF /* Date.swift */; };
 		BFB14ABA257B3F9A0003A4AF /* ProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB14AB9257B3F9A0003A4AF /* ProgressRing.swift */; };
-		BFB2A6B225666B9200897B2A /* TripRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2A6B125666B9200897B2A /* TripRowView.swift */; };
 		BFB2A6B625666CED00897B2A /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = BFB2A6B525666CED00897B2A /* Kanna */; };
 		BFB2A6B925666D1300897B2A /* TrainFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB2A6B825666D1300897B2A /* TrainFetcher.swift */; };
 		BFC7ACC32568DF0200932A42 /* TripInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7ACC22568DF0200932A42 /* TripInfoView.swift */; };
 		BFC9F04225B13D1800237ACA /* TripDetailConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9F04125B13D1700237ACA /* TripDetailConfirmationView.swift */; };
 		BFC9F04625B13DFF00237ACA /* AddTripCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9F04525B13DFF00237ACA /* AddTripCapsule.swift */; };
 		BFE578922566B03700D4E3C7 /* TripFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE578912566B03700D4E3C7 /* TripFetcher.swift */; };
+		BFED9C3B289966E3009B92C5 /* GraphViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFED9C3A289966E3009B92C5 /* GraphViews.swift */; };
+		BFF94DD32BD270C80017A10C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF20A66A25661FBD00BA4981 /* ContentView.swift */; };
 		BFFACA232566403900C11400 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFACA222566403900C11400 /* LocationManager.swift */; };
+		BF52436D63F466E56B505816 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23495616FE33873ADDC13F /* Fleet.swift */; };
+		BF9867B3B8BEA7F9968345EC /* FleetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF542B2770CB701B3B61C7EE /* FleetStore.swift */; };
+		BF81B142F33A70D6028FDFE8 /* FleetImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8C09303AC4F334CD4CAEE5 /* FleetImageStore.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BF9DFD2D25905C8D00C6CEF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF20A65B25661FBD00BA4981 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BF9DFD2525905C8C00C6CEF4;
-			remoteInfo = AddTripIntent;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BF99F002279D955700C41531 /* Embed Watch Content */ = {
@@ -87,15 +86,14 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF9DFD3125905C9400C6CEF4 /* Embed App Extensions */ = {
+		BF9DFD3125905C9400C6CEF4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				BF9DFD2F25905C8D00C6CEF4 /* AddTripIntent.appex in Embed App Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -115,11 +113,10 @@
 		BF20A66D25661FBD00BA4981 /* TrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		BF20A66F25661FC800BA4981 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF20A67225661FC800BA4981 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		BF20A67525661FC800BA4981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF20A67725661FC800BA4981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF20A67E2566204900BA4981 /* TrainTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrainTrack.entitlements; sourceTree = "<group>"; };
 		BF20A6802566204C00BA4981 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		BF20A6842566247400BA4981 /* TripAdder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripAdder.swift; sourceTree = "<group>"; };
+		BF20A6842566247400BA4981 /* TripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManager.swift; sourceTree = "<group>"; };
 		BF2367FF279D5B6C0007EBBB /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BF236802279D5C8D0007EBBB /* VisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionViewController.swift; sourceTree = "<group>"; };
 		BF236803279D5C8D0007EBBB /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -133,12 +130,26 @@
 		BF30A8962567D45200652311 /* TrainDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainDetailView.swift; sourceTree = "<group>"; };
 		BF30A89E2567DFB200652311 /* VisualTrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualTrainView.swift; sourceTree = "<group>"; };
 		BF328B6A25679E1A00203A9F /* NewTripButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripButtonView.swift; sourceTree = "<group>"; };
+		BF351A052BC7F31800ECC9EE /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
+		BF351A072BC7F60700ECC9EE /* TrainDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainDataDownloader.swift; sourceTree = "<group>"; };
+		BF351A0B2BC82B3600ECC9EE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BF3765F22BD6230100B6F698 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		BF397F1F29681A8C00A51D45 /* CompletedSetAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedSetAlertView.swift; sourceTree = "<group>"; };
+		BF41DEBF28F852B8004B608F /* CarriageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarriageInfoView.swift; sourceTree = "<group>"; };
 		BF4AC6672567B72F00B4ED6C /* EnterCarriageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterCarriageView.swift; sourceTree = "<group>"; };
 		BF4BCC3D2566A4D500C1460E /* SetTrainList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTrainList.swift; sourceTree = "<group>"; };
 		BF4BCC402566A4E100C1460E /* SetTrainListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTrainListItem.swift; sourceTree = "<group>"; };
+		BF51B5062BD649870056CE7E /* NotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSender.swift; sourceTree = "<group>"; };
+		BF5386D62BCBEB2400263314 /* CarriageInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarriageInfoProvider.swift; sourceTree = "<group>"; };
+		BF5386DA2BCC43D200263314 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BF5386DC2BCC492000263314 /* TotalTripsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTripsChartView.swift; sourceTree = "<group>"; };
+		BF58CEEF2AC6C3CE0051499E /* TrainTrackAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTrackAppIntent.swift; sourceTree = "<group>"; };
 		BF6C2B4E279C07B0006D2201 /* AppShortcutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcutHandler.swift; sourceTree = "<group>"; };
+		BF7156972BCF6D26000A8D51 /* TrainCarriageTripCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainCarriageTripCountView.swift; sourceTree = "<group>"; };
+		BF7BC0BA2BC9524F0035DA63 /* TrainData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrainData.xcdatamodel; sourceTree = "<group>"; };
 		BF7DDF2025663016007885BA /* AllTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTripsView.swift; sourceTree = "<group>"; };
 		BF85B71E2568980E007CF1B7 /* TrainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainHeaderView.swift; sourceTree = "<group>"; };
+		BF89B9002906A0EA00BFEB85 /* RoundedCornersShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersShape.swift; sourceTree = "<group>"; };
 		BF99EFE8279D955700C41531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF99EFF3279D955700C41531 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BF99EFF5279D955700C41531 /* TrainTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTrackApp.swift; sourceTree = "<group>"; };
@@ -150,23 +161,25 @@
 		BF99F028279D993A00C41531 /* TrainImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TrainImages.xcassets; sourceTree = "<group>"; };
 		BF99F02B279D9A9200C41531 /* TrainTrack Watch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TrainTrack Watch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		BF99F02C279D9A9500C41531 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.3.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
-		BF9DFD2625905C8C00C6CEF4 /* AddTripIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AddTripIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF9DF47C2C9D6FAB007AECA0 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		BF9DFD2725905C8D00C6CEF4 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
-		BF9DFD2A25905C8D00C6CEF4 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		BF9DFD2C25905C8D00C6CEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BF9DFD3025905C9200C6CEF4 /* AddTripIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AddTripIntent.entitlements; sourceTree = "<group>"; };
-		BF9DFD3725905CEA00C6CEF4 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		BFA15D432B91C73A00A72A37 /* TrainTrack 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TrainTrack 2.xcdatamodel"; sourceTree = "<group>"; };
 		BFB14AAC257B2AC00003A4AF /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		BFB14AB1257B30430003A4AF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BFB14AB4257B38A20003A4AF /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BFB14AB9257B3F9A0003A4AF /* ProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRing.swift; sourceTree = "<group>"; };
 		BFB2A6B125666B9200897B2A /* TripRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRowView.swift; sourceTree = "<group>"; };
 		BFB2A6B825666D1300897B2A /* TrainFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainFetcher.swift; sourceTree = "<group>"; };
+		BFC028A02B930D1F00BC5447 /* TrainDataLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainDataLinker.swift; sourceTree = "<group>"; };
 		BFC7ACC22568DF0200932A42 /* TripInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoView.swift; sourceTree = "<group>"; };
 		BFC9F04125B13D1700237ACA /* TripDetailConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailConfirmationView.swift; sourceTree = "<group>"; };
 		BFC9F04525B13DFF00237ACA /* AddTripCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripCapsule.swift; sourceTree = "<group>"; };
 		BFE578912566B03700D4E3C7 /* TripFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFetcher.swift; sourceTree = "<group>"; };
+		BFED9C3A289966E3009B92C5 /* GraphViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViews.swift; sourceTree = "<group>"; };
 		BFFACA222566403900C11400 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		BF23495616FE33873ADDC13F /* Fleet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fleet.swift; sourceTree = "<group>"; };
+		BF542B2770CB701B3B61C7EE /* FleetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FleetStore.swift; sourceTree = "<group>"; };
+		BF8C09303AC4F334CD4CAEE5 /* FleetImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FleetImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,19 +187,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF397F2329681EB100A51D45 /* ConfettiSwiftUI in Frameworks */,
 				BF85B71C2567FB00007CF1B7 /* SPAlert in Frameworks */,
 				BF6602712791623B00BC4034 /* Introspect in Frameworks */,
 				BFB2A6B625666CED00897B2A /* Kanna in Frameworks */,
 				BF20A6812566204C00BA4981 /* CloudKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF9DFD2325905C8C00C6CEF4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF9DFD2825905C8D00C6CEF4 /* Intents.framework in Frameworks */,
-				BF9DFD4225905E5300C6CEF4 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +201,7 @@
 		BF17D9E625A84D630020C85A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BFFD1C3D572ACAE447D598F7 /* Fleet */,
 				BF17D9EA25A856220020C85A /* Train */,
 				BF17D9E725A84DBA0020C85A /* Trip */,
 				BF17D9EB25A856500020C85A /* Utilities */,
@@ -208,9 +214,19 @@
 			children = (
 				BFB14AAC257B2AC00003A4AF /* Trip.swift */,
 				BFE578912566B03700D4E3C7 /* TripFetcher.swift */,
-				BF20A6842566247400BA4981 /* TripAdder.swift */,
+				BF20A6842566247400BA4981 /* TripManager.swift */,
 			);
 			path = Trip;
+			sourceTree = "<group>";
+		};
+		BFFD1C3D572ACAE447D598F7 /* Fleet */ = {
+			isa = PBXGroup;
+			children = (
+				BF23495616FE33873ADDC13F /* Fleet.swift */,
+				BF542B2770CB701B3B61C7EE /* FleetStore.swift */,
+				BF8C09303AC4F334CD4CAEE5 /* FleetImageStore.swift */,
+			);
+			path = Fleet;
 			sourceTree = "<group>";
 		};
 		BF17D9EA25A856220020C85A /* Train */ = {
@@ -219,6 +235,7 @@
 				BF14A51A256683B800535458 /* Train.swift */,
 				BF14A51D2566840200535458 /* TrainType.swift */,
 				BFB2A6B825666D1300897B2A /* TrainFetcher.swift */,
+				BF351A072BC7F60700ECC9EE /* TrainDataDownloader.swift */,
 				BF30A88D2567CE1D00652311 /* TrainLookup.swift */,
 				BF14A52025668B6400535458 /* TrainSets.swift */,
 			);
@@ -228,8 +245,11 @@
 		BF17D9EB25A856500020C85A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BF51B5062BD649870056CE7E /* NotificationSender.swift */,
 				BFFACA222566403900C11400 /* LocationManager.swift */,
 				BFB14AB4257B38A20003A4AF /* Date.swift */,
+				BFC028A02B930D1F00BC5447 /* TrainDataLinker.swift */,
+				BF5386D62BCBEB2400263314 /* CarriageInfoProvider.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -238,6 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				BF7DDF2025663016007885BA /* AllTripsView.swift */,
+				BF5386DC2BCC492000263314 /* TotalTripsChartView.swift */,
+				BF5386DA2BCC43D200263314 /* HomeView.swift */,
 				BFB2A6B125666B9200897B2A /* TripRowView.swift */,
 				BF17DA1125A859240020C85A /* Trip Info Views */,
 				BF328B6A25679E1A00203A9F /* NewTripButtonView.swift */,
@@ -271,6 +293,7 @@
 			children = (
 				BF4BCC3D2566A4D500C1460E /* SetTrainList.swift */,
 				BF4BCC402566A4E100C1460E /* SetTrainListItem.swift */,
+				BF7156972BCF6D26000A8D51 /* TrainCarriageTripCountView.swift */,
 			);
 			path = "Train List";
 			sourceTree = "<group>";
@@ -301,6 +324,8 @@
 		BF17DA0825A858A40020C85A /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				BF41DEBF28F852B8004B608F /* CarriageInfoView.swift */,
+				BF89B9002906A0EA00BFEB85 /* RoundedCornersShape.swift */,
 				BF85B71E2568980E007CF1B7 /* TrainHeaderView.swift */,
 				BFC9F04525B13DFF00237ACA /* AddTripCapsule.swift */,
 				BF17D9E225A81B7B0020C85A /* LargeHeaderText.swift */,
@@ -338,9 +363,14 @@
 			isa = PBXGroup;
 			children = (
 				BF20A66A25661FBD00BA4981 /* ContentView.swift */,
+				BF9DF47C2C9D6FAB007AECA0 /* DashboardView.swift */,
+				BF3765F22BD6230100B6F698 /* NotificationView.swift */,
+				BF397F1F29681A8C00A51D45 /* CompletedSetAlertView.swift */,
 				BF17D9F225A856BB0020C85A /* Trip Views */,
 				BF17D9F525A8570A0020C85A /* Train Views */,
+				BFED9C39289966A1009B92C5 /* Graphs Views */,
 				BF15CF8825A88176002366B3 /* PreviewContextMenu.swift */,
+				BF351A052BC7F31800ECC9EE /* DataTestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,7 +381,7 @@
 				BF17DA1D25A85A720020C85A /* Delegates */,
 				BF20A66F25661FC800BA4981 /* Assets.xcassets */,
 				BF20A67E2566204900BA4981 /* TrainTrack.entitlements */,
-				BF20A67425661FC800BA4981 /* LaunchScreen.storyboard */,
+				BF351A0B2BC82B3600ECC9EE /* LaunchScreen.storyboard */,
 				BF20A67725661FC800BA4981 /* Info.plist */,
 			);
 			path = Utilities;
@@ -361,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				BF20A66625661FBD00BA4981 /* AppDelegate.swift */,
+				BF58CEEF2AC6C3CE0051499E /* TrainTrackAppIntent.swift */,
 				BF6C2B4E279C07B0006D2201 /* AppShortcutHandler.swift */,
 				BF20A66825661FBD00BA4981 /* SceneDelegate.swift */,
 			);
@@ -372,7 +403,6 @@
 			children = (
 				BF99F00A279D959A00C41531 /* Shared */,
 				BF20A66525661FBD00BA4981 /* TrainTrack */,
-				BF9DFD2925905C8D00C6CEF4 /* AddTripIntent */,
 				BF99EFE7279D955600C41531 /* TrainTrack Watch */,
 				BF99EFF2279D955700C41531 /* TrainTrack Watch WatchKit Extension */,
 				BF20A66425661FBD00BA4981 /* Products */,
@@ -384,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				BF20A66325661FBD00BA4981 /* TrainTrack Sydney.app */,
-				BF9DFD2625905C8C00C6CEF4 /* AddTripIntent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				BF99F00B279D95B300C41531 /* TTCloudKit.swift */,
+				BF7BC0B92BC9524F0035DA63 /* TrainData.xcdatamodeld */,
 				BF20A66C25661FBD00BA4981 /* TrainTrack.xcdatamodeld */,
 				BF99F028279D993A00C41531 /* TrainImages.xcassets */,
 				BF17D9E625A84D630020C85A /* Model */,
@@ -470,15 +500,12 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		BF9DFD2925905C8D00C6CEF4 /* AddTripIntent */ = {
+		BFED9C39289966A1009B92C5 /* Graphs Views */ = {
 			isa = PBXGroup;
 			children = (
-				BF9DFD3025905C9200C6CEF4 /* AddTripIntent.entitlements */,
-				BF9DFD2A25905C8D00C6CEF4 /* IntentHandler.swift */,
-				BF9DFD3725905CEA00C6CEF4 /* Intents.intentdefinition */,
-				BF9DFD2C25905C8D00C6CEF4 /* Info.plist */,
+				BFED9C3A289966E3009B92C5 /* GraphViews.swift */,
 			);
-			path = AddTripIntent;
+			path = "Graphs Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,40 +518,23 @@
 				BF20A65F25661FBD00BA4981 /* Sources */,
 				BF20A66025661FBD00BA4981 /* Frameworks */,
 				BF20A66125661FBD00BA4981 /* Resources */,
-				BF9DFD3125905C9400C6CEF4 /* Embed App Extensions */,
+				BF9DFD3125905C9400C6CEF4 /* Embed Foundation Extensions */,
 				BF99F002279D955700C41531 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BF9DFD2E25905C8D00C6CEF4 /* PBXTargetDependency */,
 			);
 			name = "TrainTrack Sydney";
 			packageProductDependencies = (
 				BFB2A6B525666CED00897B2A /* Kanna */,
 				BF85B71B2567FB00007CF1B7 /* SPAlert */,
 				BF6602702791623B00BC4034 /* Introspect */,
+				BF397F2229681EB100A51D45 /* ConfettiSwiftUI */,
 			);
 			productName = TrainTrack;
 			productReference = BF20A66325661FBD00BA4981 /* TrainTrack Sydney.app */;
 			productType = "com.apple.product-type.application";
-		};
-		BF9DFD2525905C8C00C6CEF4 /* AddTripIntent */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BF9DFD3425905C9400C6CEF4 /* Build configuration list for PBXNativeTarget "AddTripIntent" */;
-			buildPhases = (
-				BF9DFD2225905C8C00C6CEF4 /* Sources */,
-				BF9DFD2325905C8C00C6CEF4 /* Frameworks */,
-				BF9DFD2425905C8C00C6CEF4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AddTripIntent;
-			productName = AddTripIntent;
-			productReference = BF9DFD2625905C8C00C6CEF4 /* AddTripIntent.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -532,14 +542,12 @@
 		BF20A65B25661FBD00BA4981 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					BF20A66225661FBD00BA4981 = {
 						CreatedOnToolsVersion = 12.2;
-					};
-					BF9DFD2525905C8C00C6CEF4 = {
-						CreatedOnToolsVersion = 12.3;
 					};
 				};
 			};
@@ -556,13 +564,13 @@
 				BFB2A6B425666CED00897B2A /* XCRemoteSwiftPackageReference "Kanna" */,
 				BF85B71A2567FB00007CF1B7 /* XCRemoteSwiftPackageReference "SPAlert" */,
 				BF66026F2791623B00BC4034 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				BF397F2129681EB000A51D45 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			productRefGroup = BF20A66425661FBD00BA4981 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BF20A66225661FBD00BA4981 /* TrainTrack Sydney */,
-				BF9DFD2525905C8C00C6CEF4 /* AddTripIntent */,
 			);
 		};
 /* End PBXProject section */
@@ -572,18 +580,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF20A67625661FC800BA4981 /* LaunchScreen.storyboard in Resources */,
 				BF20A67325661FC800BA4981 /* Preview Assets.xcassets in Resources */,
 				BF20A67025661FC800BA4981 /* Assets.xcassets in Resources */,
-				BF23680B279D5E500007EBBB /* CameraView.storyboard in Resources */,
 				BF99F029279D993A00C41531 /* TrainImages.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF9DFD2425905C8C00C6CEF4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,37 +593,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFB2A6B225666B9200897B2A /* TripRowView.swift in Sources */,
+				BF7156982BCF6D26000A8D51 /* TrainCarriageTripCountView.swift in Sources */,
 				BF30A8912567D04600652311 /* EnteredCarriageResultParentView.swift in Sources */,
-				BF7DDF1725662AB6007885BA /* TripAdder.swift in Sources */,
-				BF9DFD3D25905DF000C6CEF4 /* Intents.intentdefinition in Sources */,
-				BF14A5242566912700535458 /* SetsList.swift in Sources */,
-				BF4BCC3E2566A4D500C1460E /* SetTrainList.swift in Sources */,
+				BF7DDF1725662AB6007885BA /* TripManager.swift in Sources */,
+				BFED9C3B289966E3009B92C5 /* GraphViews.swift in Sources */,
 				BF6C2B4F279C07B0006D2201 /* AppShortcutHandler.swift in Sources */,
-				BF4BCC412566A4E100C1460E /* SetTrainListItem.swift in Sources */,
+				BF3765F32BD6230100B6F698 /* NotificationView.swift in Sources */,
+				BF7BC0AC2BC944C40035DA63 /* AllTripsView.swift in Sources */,
+				BF51B5072BD649870056CE7E /* NotificationSender.swift in Sources */,
 				BF236809279D5C8D0007EBBB /* ViewController.swift in Sources */,
 				BF14A51B256683B800535458 /* Train.swift in Sources */,
 				BFB14AB2257B30430003A4AF /* MapView.swift in Sources */,
 				BF236800279D5B6C0007EBBB /* CameraView.swift in Sources */,
+				BF5386DD2BCC492000263314 /* TotalTripsChartView.swift in Sources */,
+				BF89B9012906A0EA00BFEB85 /* RoundedCornersShape.swift in Sources */,
 				BF20A66725661FBD00BA4981 /* AppDelegate.swift in Sources */,
-				BF7DDF2125663016007885BA /* AllTripsView.swift in Sources */,
-				BF30A8972567D45200652311 /* TrainDetailView.swift in Sources */,
 				BF20A66925661FBD00BA4981 /* SceneDelegate.swift in Sources */,
+				BF7BC0BB2BC9524F0035DA63 /* TrainData.xcdatamodeld in Sources */,
 				BFFACA232566403900C11400 /* LocationManager.swift in Sources */,
 				BF30A8942567D10600652311 /* BluePillButtonView.swift in Sources */,
 				BF30A88E2567CE1D00652311 /* TrainLookup.swift in Sources */,
+				BF7BC0AB2BC943DC0035DA63 /* DataTestView.swift in Sources */,
 				BF15CF8925A88176002366B3 /* PreviewContextMenu.swift in Sources */,
 				BFB14AAD257B2AC00003A4AF /* Trip.swift in Sources */,
+				BF5386DF2BCC49C400263314 /* SetsListItem.swift in Sources */,
+				BF58CEF02AC6C3CE0051499E /* TrainTrackAppIntent.swift in Sources */,
 				BF14A52125668B6400535458 /* TrainSets.swift in Sources */,
-				BF85B71F2568980F007CF1B7 /* TrainHeaderView.swift in Sources */,
 				BFB14ABA257B3F9A0003A4AF /* ProgressRing.swift in Sources */,
 				BF20A66E25661FBD00BA4981 /* TrainTrack.xcdatamodeld in Sources */,
+				BF9DF47D2C9D6FAB007AECA0 /* DashboardView.swift in Sources */,
+				BF397F2029681A8C00A51D45 /* CompletedSetAlertView.swift in Sources */,
+				BF5386E02BCC49C900263314 /* SetTrainListItem.swift in Sources */,
+				BF5386DE2BCC494100263314 /* SetsList.swift in Sources */,
+				BFF94DD32BD270C80017A10C /* ContentView.swift in Sources */,
+				BF5386D72BCBEB2400263314 /* CarriageInfoProvider.swift in Sources */,
 				BF4AC6682567B72F00B4ED6C /* EnterCarriageView.swift in Sources */,
+				BF41DEC028F852B8004B608F /* CarriageInfoView.swift in Sources */,
 				BF30A89F2567DFB200652311 /* VisualTrainView.swift in Sources */,
+				BF5386E12BCC49CC00263314 /* SetTrainList.swift in Sources */,
 				BF236807279D5C8D0007EBBB /* PreviewView.swift in Sources */,
+				BF7BC0AE2BC944DF0035DA63 /* TripRowView.swift in Sources */,
+				BF351A082BC7F60700ECC9EE /* TrainDataDownloader.swift in Sources */,
 				BFB2A6B925666D1300897B2A /* TrainFetcher.swift in Sources */,
 				BF23680D279D6E3B0007EBBB /* EnteredCarriageManager.swift in Sources */,
-				BF20A66B25661FBD00BA4981 /* ContentView.swift in Sources */,
 				BF328B6B25679E1A00203A9F /* NewTripButtonView.swift in Sources */,
 				BF14A51E2566840200535458 /* TrainType.swift in Sources */,
 				BFC9F04225B13D1800237ACA /* TripDetailConfirmationView.swift in Sources */,
@@ -632,49 +643,25 @@
 				BFE578922566B03700D4E3C7 /* TripFetcher.swift in Sources */,
 				BF17D9E325A81B7B0020C85A /* LargeHeaderText.swift in Sources */,
 				BF236806279D5C8D0007EBBB /* VisionViewController.swift in Sources */,
+				BF5386DB2BCC43D200263314 /* HomeView.swift in Sources */,
 				BF236808279D5C8D0007EBBB /* StringUtils.swift in Sources */,
+				BF52436D63F466E56B505816 /* Fleet.swift in Sources */,
+				BF9867B3B8BEA7F9968345EC /* FleetStore.swift in Sources */,
+				BF81B142F33A70D6028FDFE8 /* FleetImageStore.swift in Sources */,
 				BF99F00C279D95B300C41531 /* TTCloudKit.swift in Sources */,
-				BF14A527256692A300535458 /* SetsListItem.swift in Sources */,
 				BFC7ACC32568DF0200932A42 /* TripInfoView.swift in Sources */,
 				BFC9F04625B13DFF00237ACA /* AddTripCapsule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF9DFD2225905C8C00C6CEF4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF9DFD3825905CEA00C6CEF4 /* Intents.intentdefinition in Sources */,
-				BF9DFD2B25905C8D00C6CEF4 /* IntentHandler.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BF9DFD2E25905C8D00C6CEF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BF9DFD2525905C8C00C6CEF4 /* AddTripIntent */;
-			targetProxy = BF9DFD2D25905C8D00C6CEF4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		BF20A67425661FC800BA4981 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF20A67525661FC800BA4981 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BF20A67825661FC800BA4981 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -708,6 +695,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -722,7 +710,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -736,6 +724,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -769,6 +758,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -777,7 +767,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -790,24 +780,32 @@
 		BF20A67B25661FC800BA4981 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = TrainTrack/Utilities/TrainTrack.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TrainTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrainTrack/Utilities/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -816,68 +814,32 @@
 		BF20A67C25661FC800BA4981 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = TrainTrack/Utilities/TrainTrack.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TrainTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TrainTrack/Utilities/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		BF9DFD3225905C9400C6CEF4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AddTripIntent/AddTripIntent.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
-				INFOPLIST_FILE = AddTripIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack.AddTripIntent;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		BF9DFD3325905C9400C6CEF4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = AddTripIntent/AddTripIntent.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
-				INFOPLIST_FILE = AddTripIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ryankontos.TrainTrack.AddTripIntent;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -904,18 +866,17 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BF9DFD3425905C9400C6CEF4 /* Build configuration list for PBXNativeTarget "AddTripIntent" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BF9DFD3225905C9400C6CEF4 /* Debug */,
-				BF9DFD3325905C9400C6CEF4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BF397F2129681EB000A51D45 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		BF66026F2791623B00BC4034 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
@@ -943,6 +904,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BF397F2229681EB100A51D45 /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF397F2129681EB000A51D45 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
 		BF6602702791623B00BC4034 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BF66026F2791623B00BC4034 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
@@ -964,10 +930,22 @@
 		BF20A66C25661FBD00BA4981 /* TrainTrack.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				BFA15D432B91C73A00A72A37 /* TrainTrack 2.xcdatamodel */,
 				BF20A66D25661FBD00BA4981 /* TrainTrack.xcdatamodel */,
 			);
 			currentVersion = BF20A66D25661FBD00BA4981 /* TrainTrack.xcdatamodel */;
 			path = TrainTrack.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		BF7BC0B92BC9524F0035DA63 /* TrainData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF7BC0BA2BC9524F0035DA63 /* TrainData.xcdatamodel */,
+			);
+			currentVersion = BF7BC0BA2BC9524F0035DA63 /* TrainData.xcdatamodel */;
+			name = TrainData.xcdatamodeld;
+			path = /Users/ryankontos/Developer/TrainTrack/Shared/TrainData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

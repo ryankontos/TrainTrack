@@ -1,34 +1,41 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Kanna",
-        "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
-        "state": {
-          "branch": null,
-          "revision": "4a80ebe93b6966d5083394fcaaaff57a2fcec935",
-          "version": "5.2.3"
-        }
-      },
-      {
-        "package": "SPAlert",
-        "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
-        "state": {
-          "branch": null,
-          "revision": "18862409586ac547bcdf8957cd96beb872fbc729",
-          "version": "2.1.4"
-        }
-      },
-      {
-        "package": "Introspect",
-        "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect.git",
-        "state": {
-          "branch": "master",
-          "revision": "72a509c93166540c0adf8323fd2652daade7f9f6",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "confettiswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/simibac/ConfettiSwiftUI.git",
+      "state" : {
+        "revision" : "8d3a15d0aa2991e0761749b767ef8d89bca6275a",
+        "version" : "1.0.1"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "kanna",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tid-kijyun/Kanna.git",
+      "state" : {
+        "revision" : "4a80ebe93b6966d5083394fcaaaff57a2fcec935",
+        "version" : "5.2.3"
+      }
+    },
+    {
+      "identity" : "spalert",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanvorobei/SPAlert",
+      "state" : {
+        "revision" : "12e9c25d650c10ea5988c75e5c5ade1e38742a96",
+        "version" : "2.1.4"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "72a509c93166540c0adf8323fd2652daade7f9f6"
+      }
+    }
+  ],
+  "version" : 2
 }

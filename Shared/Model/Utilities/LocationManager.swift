@@ -8,89 +8,77 @@
 import Foundation
 import MapKit
 import CoreLocation
+import os.log
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
-    
-    static var shared: LocationManager!
-    
-    var currentLocation: CLLocation?
-    
-    var currentLocationName: String?
-    
-    let locationManager = CLLocationManager()
-    
+private let logger = Logger(subsystem: "com.ryankontos.traintrack", category: "LocationManager")
+
+final class LocationManager: NSObject, CLLocationManagerDelegate {
+
+    static var shared: LocationManager?
+
+    private(set) var currentLocation: CLLocation?
+    private(set) var currentLocationName: String?
+
+    private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
+    private var isGeocoding = false
+
     override init() {
-        
         super.init()
-        activate()
-        
-        
-    }
-    
-    func activate() {
-        
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        locationManager.requestLocation()
-        
-        DispatchQueue.global().async {
-            self.updateLocationName()
-        }
-        
-        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
-    
+
+    func activate() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.startUpdatingLocation()
+        }
+    }
+
     func updateLocationName() {
-        
-        guard let location = self.currentLocation else {
-            return
+        guard let location = currentLocation, !isGeocoding else { return }
+        isGeocoding = true
+
+        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            defer { self?.isGeocoding = false }
+
+            if let error {
+                logger.error("Geocoding error: \(error.localizedDescription)")
+                return
+            }
+
+            if let locality = placemarks?.first?.locality {
+                self?.currentLocationName = locality
+                logger.info("Location: \(locality)")
+            }
         }
-        
-        print("Looking up location")
-        
-            let geocoder = CLGeocoder()
-                
-            // Look up the location and pass it to the completion handler
-            geocoder.reverseGeocodeLocation(location,
-                        completionHandler: { (placemarks, error) in
-                            
-                print("Geocode done")
-                            
-                if error == nil {
-                    
-                    let firstLocation = placemarks?[0]
-                    
-                    if let l = firstLocation?.locality {
-                        self.currentLocationName = l
-                        
-                        print("Current location name is now \(l)")
-                        
-                    } else {
-                        print("No locality")
-                    }
-                    
-                } else {
-                    
-                    print("Geocoding error: \(error!.localizedDescription)")
-                    
-                }
-                            
-            })
-        
-        
     }
-    
+
+    // MARK: - CLLocationManagerDelegate
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = locations.last
+        guard let latest = locations.last else { return }
+        currentLocation = latest
+
+        // Auto-update name if we don't have one yet
+        if currentLocationName == nil {
+            updateLocationName()
+        }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
+        logger.error("Location update failed: \(error.localizedDescription)")
     }
-    
-    
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+        default:
+            break
+        }
+    }
 }
 

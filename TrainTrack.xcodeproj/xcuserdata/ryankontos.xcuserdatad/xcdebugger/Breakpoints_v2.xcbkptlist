@@ -66,38 +66,6 @@
             endingLineNumber = "41"
             landmarkName = "contextSaved()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D28165FA-B113-4EE5-912F-3A9F37BD50F6 - b725208955e30624"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TrainTrack.TrainFetcher.contextSaved() -&gt; ()"
-                  moduleName = "TrainTrack"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryankontos/Developer/TrainTrack/TrainTrack/Model/Train/TrainFetcher.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "204">
-               </Location>
-               <Location
-                  uuid = "D28165FA-B113-4EE5-912F-3A9F37BD50F6 - 5240535264e29bf6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in TrainTrack.TrainFetcher.contextSaved() -&gt; ()"
-                  moduleName = "TrainTrack"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryankontos/Developer/TrainTrack/TrainTrack/Model/Train/TrainFetcher.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -119,32 +87,124 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EBC6D4B5-8DEF-4BC0-BB0A-80407794E944"
+            uuid = "5E1F0F1F-3B12-4AEA-B396-B6B02941F9F1"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TrainTrack/View/Trip Views/AllTripsView.swift"
+            filePath = "Shared/Model/Train/TrainSets.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "updateGroups()"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "generateSets(from:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "74B125F7-84C0-418B-8E39-9B73F48E3A9A"
+            uuid = "03393993-D305-46DD-B035-6396F5FC2219"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TrainTrack/View/Trip Views/Trip Adder Views/Camera/ViewController.swift"
+            filePath = "Shared/Model/Train/TrainFetcher.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "setupCamera()"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "TrainFetcher"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            uuid = "57174402-B84D-451D-A18C-30F66D1A02B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23D2032B-C31D-41B7-9327-76674BCF5566"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Model/Train/TrainSets.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "matchTripToSetName(trip:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE8FE18E-7A09-49FD-90CC-D9FE141CD605"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrainTrack/View/Train Views/Train Detail/Subviews/CarriageInfoView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "getCorners(index:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D9291CF5-24FC-4D06-9361-70BB51815705"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrainTrack/View/Train Views/Train Detail/Subviews/CarriageInfoView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "getCorners(index:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74C5469C-36FB-442E-9F2A-4C7E5A9C6140"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Model/Utilities/TripStoreSyncService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "syncTripsWithMirror(storedTrips:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03BEAFF5-1692-40FB-902F-BCFBBFE8EB01"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Model/Utilities/TrainStatsLinker.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "linkStats()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

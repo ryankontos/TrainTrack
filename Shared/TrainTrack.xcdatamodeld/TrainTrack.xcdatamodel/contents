@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ArchiveRecord" representedClassName=".ArchiveRecord" syncable="YES" codeGenerationType="class">
+        <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="StoredTrip" representedClassName=".StoredTrip" syncable="YES" codeGenerationType="class">
+        <attribute name="archiveId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="carriageCode" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
@@ -9,6 +16,7 @@
         <attribute name="notes" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="StoredTrip" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="ArchiveRecord" positionX="160" positionY="90" width="128" height="89"/>
+        <element name="StoredTrip" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>

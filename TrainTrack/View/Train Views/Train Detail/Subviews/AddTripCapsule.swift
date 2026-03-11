@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct AddTripCapsule: View {
+    
+    @Binding var added: Bool
+    
     var body: some View {
         
         Capsule()
-            .foregroundColor(Color.blue)
-            .frame(width: 75, height: 30)
+            .foregroundColor(added ? .gray : .blue)
+            .frame(width: added ? 75 : 53, height: 30)
             .overlay(
                 
-                Text("ADD")
+                Text(added ? "ADDED" : "ADD")
                     .foregroundColor(.white)
                     .textCase(.none)
                     .font(.system(size: 15, weight: .semibold, design: .default))
+                    
+
             
             )
         
@@ -27,6 +32,6 @@ struct AddTripCapsule: View {
 
 struct AddTripCapsule_Previews: PreviewProvider {
     static var previews: some View {
-        AddTripCapsule()
+        AddTripCapsule(added: .constant(false))
     }
 }

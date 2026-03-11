@@ -8,69 +8,34 @@
 import SwiftUI
 
 struct VisualTrainView: View {
-    
-    @State var train: Train
-    
-    @State var highlight: String?
-    
+
+    let train: FleetTrain
+    var highlight: String?
+    @ObservedObject private var store = FleetStore.shared
+
     var body: some View {
-       
-        HStack {
-            
-            ForEach(train.carriages, id: \.self, content: { carriage in
-                
-             
+        HStack(spacing: 2) {
+            ForEach(train.carriages, id: \.self) { code in
+                let tripCount = store.stats.carriageTripCounts[code] ?? 0
+
                 RoundedRectangle(cornerRadius: 5)
-                    .foregroundColor(Color(computeBoxColour(for: carriage)))
+                    .foregroundColor(boxColor(code: code, trips: tripCount))
                     .frame(height: 27)
-                    .overlay(Text(tripsFor(carriage: carriage))
-                                .foregroundColor(.white))
-                    
-                
-                
-            })
-            
-            
-        }
-        
-        
-    }
-    
-    func computeBoxColour(for carriage: String) -> UIColor {
-        
-        
-        if let uH = highlight, carriage == uH {
-            return UIColor.green.withAlphaComponent(0.5)
-        } else {
-            return UIColor.gray.withAlphaComponent(0.75)
-        }
-        
-        
-    }
-    
-    func tripsFor(carriage: String) -> String {
-        
-        var counter = 0
-        
-        for trip in train.trips {
-            
-            if trip.carriageCode == carriage {
-                counter += 1
+                    .overlay {
+                        if tripCount > 0 {
+                            Text("\(tripCount)")
+                                .font(.caption2.bold())
+                                .foregroundColor(.white)
+                        }
+                    }
             }
-            
         }
-        
-        if counter > 0 {
-        
-        return String(counter)
-            
-        } else {
-            
-            return ""
-        }
-        
     }
-    
+
+    private func boxColor(code: String, trips: Int) -> Color {
+        if let h = highlight, code == h {
+            return .green.opacity(0.7)
+        }
+        return trips > 0 ? .accentColor.opacity(0.7) : .gray.opacity(0.3)
+    }
 }
-
-

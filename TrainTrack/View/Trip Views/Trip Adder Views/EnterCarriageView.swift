@@ -6,159 +6,147 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct EnterCarriageView: View {
-    
-    enum FocusField: Hashable {
-        case field
-      }
-    
-    @EnvironmentObject var manager: EnteredCarriageManager
-    
-    @ObservedObject var trainFetcher = TrainFetcher.shared
 
     @Binding var showingSheet: Bool
-    
-    @State var contents: String = ""
-    
-    @State var showCam = true
-    
-    let cameraView = CameraViewController()
-    
-    @FocusState private var focusedField: FocusField?
-    
-    var body: some View {
-        
-            ZStack {
+    @StateObject private var manager = EnteredCarriageManager()
+    @FocusState private var isFieldFocused: Bool
+    @ObservedObject private var store = FleetStore.shared
 
+    private let tripManager = TripManager()
+
+    @State private var showingSaved = false
+    @State private var savedCode = ""
+
+    var body: some View {
         Form {
-            
-            
-            Section(header: Text("Enter Carriage Code")
-                        .font(Font.system(size: 20, weight: .regular, design: .default))
-                        .padding(.vertical, 10)
-                        .textCase(.none)
-                        .foregroundColor(Color(UIColor.label))
-                        .multilineTextAlignment(.leading), content: {
-                            
-                TextField("Code", text: $manager.enteredText)
-                                
-                                
-                    .padding(.horizontal, 10)
-                            
-                        })
-            
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            
-          
-        }
-        .safeAreaInset(edge: .bottom, content: {
-            
-            ZStack {
-                
-                VStack(spacing: 6) {
-                
-                    #if !targetEnvironment(macCatalyst)
-                    
-                    Button(action: { manager.showCamera = true }, label: {
-                        
-                        Label("Use Camera", systemImage: "camera.fill")
-                        
-                            .frame(height: 40)
-                            .frame(maxWidth: .infinity)
-                        
-                    })
-                        .tint(.blue)
-                        .buttonStyle(.bordered)
-                    
-                    #endif
-                        
-                    
-                    NavigationLink(isActive: $manager.pushTrainInfoView, destination: { EnteredCarriageResultParentView(showingSheet: $showingSheet, carriage: manager.enteredText)}, label: {
-                    Text("Next")
-                        .frame(height: 40)
-                        .frame(maxWidth: .infinity)
-                    
-                })
-                    
-                    .buttonStyle(.borderedProminent)
-                    .disabled(manager.enteredText.isEmpty)
-        
-                    
-                }
-                .padding(.all, 20)
-                
-                    .background {
-                        
-                        Rectangle()
-                            .foregroundColor(Color(uiColor: .systemGroupedBackground))
-                            .frame(maxWidth: .infinity)
-                            .edgesIgnoringSafeArea(.bottom)
-                        
-                    }
-                
+            Section {
+                TextField("Carriage code", text: $manager.enteredText)
+                    .focused($isFieldFocused)
+                    .textInputAutocapitalization(.characters)
+                    .autocorrectionDisabled()
+                    .font(.system(size: 18, weight: .medium, design: .monospaced))
+                    .submitLabel(.search)
+            } header: {
+                Text("Enter Carriage Code")
+                    .textCase(.none)
+                    .font(.subheadline)
             }
-          
-                
-            
-        })
-            
-     
-            
-            }
-            .onAppear() {
-                
-                LocationManager.shared.updateLocationName()
-                
-                
-                
-            }
-            
-            .sheet(isPresented: $manager.showCamera, onDismiss: nil, content: {
-                
-                NavigationView {
-                
-                cameraView
-                    
-                    .environmentObject(manager)
-                    
-                    .navigationBarTitleDisplayMode(.inline)
-                    .edgesIgnoringSafeArea(.bottom)
-                    .toolbar {
-                        
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            
-                            Button("Done", action: {
-                                
-                                manager.showCamera = false
-                                
-                            })
-                            
+
+            if !manager.enteredText.isEmpty {
+                Section {
+                    if manager.results.isEmpty {
+                        ContentUnavailableView {
+                            Label("No Matches", systemImage: "magnifyingglass")
+                        } description: {
+                            Text("No carriages matching '\(manager.enteredText)'")
                         }
-                        
+                        .listRowBackground(Color.clear)
+
+                        // Allow logging unknown carriage codes
+                        Button {
+                            addTrip(code: manager.enteredText.uppercased())
+                        } label: {
+                            Label("Log '\(manager.enteredText.uppercased())' anyway", systemImage: "plus.circle")
+                        }
+                    } else {
+                        ForEach(manager.results, id: \.train.name) { result in
+                            CarriageSearchResultRow(
+                                lookup: result,
+                                stats: store.stats,
+                                onSelect: { addTrip(code: result.train.carriages[result.position]) }
+                            )
+                        }
                     }
-                    .introspectNavigationController { controller in
-                        
-                        controller.navigationBar.barStyle = .default
-                    }
-                    
+                } header: {
+                    Text("\(manager.results.count) Result\(manager.results.count == 1 ? "" : "s")")
                 }
-                
-                
-                    
-                
-            })
-        
-        .navigationBarTitleDisplayMode(.large)
+            }
+        }
         .navigationTitle("New Trip")
-            
-        
-        
-        
+        .onAppear {
+            isFieldFocused = true
+            LocationManager.shared?.updateLocationName()
+        }
+        .overlay {
+            if showingSaved {
+                savedToast
+            }
+        }
     }
-    
-   
-    
-    
+
+    private func addTrip(code: String) {
+        guard !code.isEmpty else { return }
+        do {
+            try tripManager.addTrip(withCode: code)
+            savedCode = code
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+
+            withAnimation {
+                showingSaved = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                showingSheet = false
+            }
+        } catch {
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
+        }
+    }
+
+    private var savedToast: some View {
+        VStack {
+            Spacer()
+            HStack(spacing: 10) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundStyle(.green)
+                Text("Trip Saved — \(savedCode)")
+                    .font(.subheadline.bold())
+            }
+            .padding()
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
+            .shadow(radius: 8)
+            .padding(.bottom, 40)
+        }
+        .transition(.move(edge: .bottom).combined(with: .opacity))
+    }
+}
+
+struct CarriageSearchResultRow: View {
+    let lookup: FleetStore.CarriageLookup
+    let stats: FleetStats
+    let onSelect: () -> Void
+
+    private var code: String { lookup.train.carriages[lookup.position] }
+    private var tripCount: Int { stats.carriageTripCounts[code] ?? 0 }
+
+    var body: some View {
+        Button(action: onSelect) {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(code)
+                        .font(.headline.monospaced())
+
+                    Text(lookup.train.name)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text(lookup.set.name)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    if tripCount > 0 {
+                        Text("\(tripCount) prior trips")
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+            }
+        }
+    }
 }

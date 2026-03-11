@@ -6,123 +6,73 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct ContentView: View {
-  
-    @Environment(\.scenePhase) var phase
-    
-    
-    @State var showCamera = false
-    @State var showingModal = false
-    
-      var body: some View {
-  
-        TabView {
-              
+
+    @State private var selectedTab = 0
+    @State private var showingNewTrip = false
+
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            DashboardView()
+                .tabItem {
+                    Image(systemName: "gauge.with.dots.needle.33percent")
+                    Text("Dashboard")
+                }
+                .tag(0)
+
             SetsList()
                 .tabItem {
-                    
                     Image(systemName: "tram.fill")
-                    Text("Trains") }
-             
-            
+                    Text("Trains")
+                }
+                .tag(1)
+
             AllTripsView()
                 .tabItem {
-                    
                     Image(systemName: "list.bullet.circle.fill")
                     Text("Trips")
-                    
                 }
+                .tag(2)
 
-            
-          }
-          
-        .onAppear(perform: {
-            
-            
-            
-            AppShortcutItemManager.shared.setDelegate(self)
-            
-            
-        })
-          
-          
-           .safeAreaInset(edge: .bottom) {
-            
-                HStack {
-                    
-                    Spacer()
-                    
-                    Button(action: { showingModal = true }, label: {
-                    
-                        ZStack {
-                           
-                            Circle()
-                                .foregroundColor(Color(UIColor.systemBlue).opacity(1))
-                                .frame(width: 58, height: 58)
-                            
-                            Image(systemName: "plus")
-                                .font(.system(size: 22, weight: .medium))
-                                .foregroundColor(.white)
-                            
-                        }
-                        
-                        
-                    })
-                        .padding(.bottom, 65)
-                        .padding(.trailing, 20)
-                    
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("More")
                 }
-                
+                .tag(3)
+        }
+        .safeAreaInset(edge: .bottom) {
+            HStack {
+                Spacer()
+                Button {
+                    showingNewTrip = true
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(.blue)
+                            .frame(width: 56, height: 56)
+                            .shadow(color: .blue.opacity(0.3), radius: 8, y: 4)
+
+                        Image(systemName: "plus")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding(.bottom, 60)
+                .padding(.trailing, 20)
             }
-           .sheet(isPresented: $showingModal, onDismiss: {
-               
-               showCamera = false
-               
-           },content: {
-               
-               NavigationView {
-               
-                   EnterCarriageView(showingSheet: $showingModal)
-                       .environmentObject(EnteredCarriageManager(camera: showCamera))
-                   .navigationBarItems(leading: Button("Cancel", action: {showingModal.toggle()}))
-                   .navigationViewStyle(StackNavigationViewStyle())
-                   .navigationBarTitleDisplayMode(.inline)
-               
-               }
-               
-               
-           })
- 
-      }
-    
-
-    
-   
-    
-}
-
-extension ContentView: AppShortcutItemDelegate {
-    func handle(shortcutItem: UIApplicationShortcutItem) {
-        
-        if (shortcutItem.userInfo?["name"] as? String) == "new" {
-            showingModal = true
         }
-        
-        if (shortcutItem.userInfo?["name"] as? String) == "scan" {
-            showCamera = true
-            showingModal = true
+        .sheet(isPresented: $showingNewTrip) {
+            NavigationStack {
+                EnterCarriageView(showingSheet: $showingNewTrip)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") { showingNewTrip = false }
+                        }
+                    }
+            }
         }
-        
-    }
-    
-    
-    
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

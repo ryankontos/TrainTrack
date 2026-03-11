@@ -8,67 +8,110 @@
 import Foundation
 import CloudKit
 import CoreData
+import os.log
 
-class TTCloudKit {
-    
-    static var shared = TTCloudKit()
-    
-    lazy var persistentContainer: NSPersistentCloudKitContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
-        
+private let logger = Logger(subsystem: "com.ryankontos.traintrack", category: "CoreData")
+
+final class TTCloudKit {
+
+    static var shared: TTCloudKit!
+
+    let persistentContainer: NSPersistentCloudKitContainer
+
+    /// The currently active archive ID. Nil means "default" (all legacy trips).
+    @Published private(set) var activeArchiveId: UUID?
+
+    init() {
+        persistentContainer = TTCloudKit.makeCloudContainer()
+        loadActiveArchive()
+    }
+
+    // MARK: - Container Setup
+
+    private static func makeCloudContainer() -> NSPersistentCloudKitContainer {
         let container = NSPersistentCloudKitContainer(name: "TrainTrack")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                
-                let id = "iCloud.ryankontos.traintrack"
-                let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
-                storeDescription.cloudKitContainerOptions = options
-                
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+
+        if let desc = container.persistentStoreDescriptions.first {
+            desc.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+            desc.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+            desc.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(
+                containerIdentifier: "iCloud.ryankontos.traintrack"
+            )
+        }
+
+        container.loadPersistentStores { description, error in
+            if let error {
+                logger.fault("Failed to load cloud store: \(error.localizedDescription)")
+            } else {
+                logger.info("Cloud store loaded: \(description.url?.lastPathComponent ?? "?")")
             }
-        })
-        
+        }
+
         container.viewContext.automaticallyMergesChangesFromParent = true
-        
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.name = "CloudViewContext"
+
         do {
-          try container.viewContext.setQueryGenerationFrom(.current)
+            try container.viewContext.setQueryGenerationFrom(.current)
         } catch {
-          fatalError("###\(#function): Failed to pin viewContext to the current generation:\(error)")
+            logger.error("Failed to pin viewContext: \(error.localizedDescription)")
         }
-        
-        
+
         return container
-    }()
+    }
 
-    // MARK: - Core Data Saving support
+    // MARK: - Saving
 
-    func saveContext () {
+    @discardableResult
+    func saveContext() -> Bool {
         let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        guard context.hasChanges else { return true }
+
+        do {
+            try context.save()
+            return true
+        } catch {
+            logger.error("Save failed: \(error.localizedDescription)")
+            context.rollback()
+            return false
+        }
+    }
+
+    // MARK: - Archive Management
+
+    func loadActiveArchive() {
+        let context = persistentContainer.viewContext
+        let request: NSFetchRequest<ArchiveRecord> = ArchiveRecord.fetchRequest()
+        request.predicate = NSPredicate(format: "isActive == YES")
+        request.fetchLimit = 1
+
+        if let active = try? context.fetch(request).first {
+            activeArchiveId = active.id
+        } else {
+            activeArchiveId = nil
+        }
+    }
+
+    func setActiveArchive(_ archiveId: UUID?) {
+        let context = persistentContainer.viewContext
+
+        let allRequest: NSFetchRequest<ArchiveRecord> = ArchiveRecord.fetchRequest()
+        allRequest.predicate = NSPredicate(format: "isActive == YES")
+        if let activeRecords = try? context.fetch(allRequest) {
+            activeRecords.forEach { $0.isActive = false }
+        }
+
+        if let archiveId {
+            let request: NSFetchRequest<ArchiveRecord> = ArchiveRecord.fetchRequest()
+            request.predicate = NSPredicate(format: "id == %@", archiveId as CVarArg)
+            request.fetchLimit = 1
+            if let record = try? context.fetch(request).first {
+                record.isActive = true
             }
         }
+
+        saveContext()
+        activeArchiveId = archiveId
+        NotificationCenter.default.post(name: .archiveChanged, object: nil)
     }
 }

@@ -6,167 +6,247 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TrainDetailView: View {
-    
-    @State var carriage: String?
-    @State var train: Train
-    
-    @Binding var showingSheet: Bool
-    
-    var overviewString: String {
-        
-        get {
-            
-            let count = train.trips.count
-            
-            if count < 1 {
-                return "You haven't registered any trips on this train."
-            }
-            
-            var plural = "trips"
-            if count == 1 {
-                plural = "trip"
-            }
-                
-            return "You've registered \(count) \(plural) on this train."
-            
-            }
-            
-        }
-    
-    var riddenString: String {
-        
-        get {
-            
-            var carriages = Set<String>()
-            
-            for trip in train.trips {
-                carriages.insert(trip.carriageCode)
-            }
-          
-            var pluralString = "trip"
-            if carriages.count != 1 {
-                pluralString += "s"
-            }
-            
-            return "Your trips include \(carriages.count)/\(train.carriages.count) of this train's carriages."
-            
-            
-        }
-        
-    }
-    
-    var body: some View {
-        
-        ZStack {
-        
-        List {
-            
-            Section {
-                TrainHeaderView(train: train, carriage: carriage, showingSheet: $showingSheet)
-                    .listRowBackground(Color.clear)
-                
-            }
-            
-            Section(header: LargeHeaderText(text: "Overview")
-                    
-                    , content: {
-  
-                        HStack(alignment: .center, spacing: 10) {
-                            
-                    Circle()
-                        .frame(width: 37, height: 37)
-                        .foregroundColor(Color.gray.opacity(0.75))
-                        .overlay(Text("\(train.trips.count)")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 19, weight: .semibold, design: .default)))
-                   
-                    Text(overviewString)
-                        .font(.system(size: 16, weight: .regular, design: .default))
-                            
-                }
-                .padding(.vertical, 20)
-                    
-                        if train.trips.count > 0 {
-                        
-                    VStack(alignment: .leading, spacing: 20) {
-                        
-                        VStack(alignment: .leading, spacing: 15) {
-                        
-                        VisualTrainView(train: train, highlight: carriage)
-                            
-            
-                            Text(riddenString)
-                            .font(.system(size: 16, weight: .regular, design: .default))
-                            
-                        }
-                            
-                    }
-                    .padding(.vertical, 20)
-                        
-                
-                }
-                        
-                    }).id(UUID())
-            
-            if train.trips.count > 0 {
-            
-            
-            Section(header: LargeHeaderText(text: "Trips"), content: {
-                
-                ForEach(train.trips, id: \.self, content: { trip in
-                    
-                 
-                    
-                    TripRowView(trip: trip, showDate: true)
-                    
-                })
 
-                
-                
-                
-            })
-            .id(UUID())
-            
+    let train: FleetTrain
+    let set: FleetSet
+
+    @ObservedObject private var store = FleetStore.shared
+    @ObservedObject private var imageStore = FleetImageStore.shared
+
+    private var trainStats: FleetStats.TrainStats? {
+        store.stats.trainStats[train.name]
+    }
+
+    private var trips: [StoredTrip] {
+        let context = TTCloudKit.shared.persistentContainer.viewContext
+        let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
+        let codes = train.carriages
+        guard !codes.isEmpty else { return [] }
+        request.predicate = NSPredicate(format: "carriageCode IN %@", codes)
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \StoredTrip.date, ascending: false)]
+        request.fetchLimit = 100
+        return (try? context.fetch(request)) ?? []
+    }
+
+    var body: some View {
+        List {
+            // Header
+            Section {
+                headerView
+                    .listRowBackground(Color.clear)
             }
-            
+
+            // Visual carriage diagram
+            if !train.carriages.isEmpty {
+                Section("Carriages") {
+                    carriageDiagram
+                        .listRowBackground(Color.clear)
+
+                    ForEach(Array(train.carriages.enumerated()), id: \.element) { index, code in
+                        carriageRow(code: code, position: index)
+                    }
+                }
+            }
+
+            // Details
+            Section("Details") {
+                if !train.depot.isEmpty {
+                    LabeledContent("Depot", value: train.depot)
+                }
+                if !train.builder.isEmpty {
+                    LabeledContent("Builder", value: train.builder)
+                }
+                LabeledContent("Status", value: train.status.displayName)
+                LabeledContent("Set", value: set.name)
+                LabeledContent("Cars", value: "\(train.carriages.count)")
+                if !train.notes.isEmpty {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Notes")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(train.notes)
+                            .font(.subheadline)
+                    }
+                }
+            }
+
+            // Trips
+            if !trips.isEmpty {
+                Section("Trips (\(trips.count))") {
+                    ForEach(trips.prefix(50), id: \.objectID) { trip in
+                        StoredTripRow(trip: trip, showDate: true)
+                    }
+
+                    if trips.count > 50 {
+                        Text("+ \(trips.count - 50) more trips")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
         }
-        .id(UUID())
-            #if os(iOS)
-        .listStyle(InsetGroupedListStyle())
-            #endif
-        .onAppear() {
-            
-            let trips = TripFetcher.shared.getTrips(for: train.carriages)
-            print("Setting \(trips.count) trip(s) on appear of TrainDetailView")
-            train.setTrips(trips: trips)
-            
-        }
-            
-        
-        }
-        
+        .listStyle(.insetGrouped)
+        .navigationTitle(train.name)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(navTitle)
-        
-        
     }
-    
-    var navTitle: String {
-        
-        get {
-            
-            if let code = carriage {
-                
-                return code
-                
+
+    // MARK: - Header
+
+    private var headerView: some View {
+        HStack(spacing: 16) {
+            TrainSetImageView(setName: set.name, size: 80, imageStore: imageStore)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text(train.name)
+                        .font(.title2.bold())
+
+                    if train.isRetired {
+                        Text(train.status.displayName)
+                            .font(.caption.bold())
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(.orange.opacity(0.15), in: Capsule())
+                            .foregroundStyle(.orange)
+                    }
+                }
+
+                Text(set.name)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+
+                overviewText
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
             }
-            
-            return train.name
-            
+
+            Spacer()
         }
-        
     }
-    
+
+    private var overviewText: some View {
+        Group {
+            if let s = trainStats, s.tripCount > 0 {
+                Text("\(s.tripCount) trips • \(s.carriagesRidden)/\(train.carriages.count) carriages ridden")
+            } else {
+                Text("No trips logged on this train yet.")
+            }
+        }
+    }
+
+    // MARK: - Carriage Diagram
+
+    private var carriageDiagram: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 3) {
+                ForEach(train.carriages, id: \.self) { code in
+                    let tripCount = store.stats.carriageTripCounts[code] ?? 0
+                    VStack(spacing: 4) {
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(tripCount > 0 ? Color.green.opacity(0.7) : Color.gray.opacity(0.25))
+                            .frame(width: 44, height: 28)
+                            .overlay {
+                                if tripCount > 0 {
+                                    Text("\(tripCount)")
+                                        .font(.caption2.bold())
+                                        .foregroundStyle(.white)
+                                }
+                            }
+
+                        Text(code)
+                            .font(.system(size: 8))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+            }
+            .padding(.vertical, 4)
+        }
+    }
+
+    // MARK: - Carriage Row
+
+    private func carriageRow(code: String, position: Int) -> some View {
+        let tripCount = store.stats.carriageTripCounts[code] ?? 0
+        return HStack {
+            Circle()
+                .fill(tripCount > 0 ? Color.green : Color.gray.opacity(0.3))
+                .frame(width: 8, height: 8)
+
+            Text(code)
+                .font(.subheadline.monospaced())
+
+            Spacer()
+
+            if tripCount > 0 {
+                Text("\(tripCount) trips")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } else {
+                Text("Not ridden")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+        }
+    }
+}
+
+// Reusable StoredTrip row for trip lists
+struct StoredTripRow: View {
+    let trip: StoredTrip
+    let showDate: Bool
+
+    var body: some View {
+        HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(Color.accentColor.opacity(0.14))
+                    .frame(width: 36, height: 36)
+                Image(systemName: "tram.fill")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.accentColor)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(trip.carriageCode ?? "Unknown")
+                    .font(.subheadline.bold().monospaced())
+
+                if let loc = trip.locationName, !loc.isEmpty {
+                    Text(loc)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Spacer()
+
+            if let date = trip.date {
+                VStack(alignment: .trailing, spacing: 2) {
+                    if showDate {
+                        Text(date.formattedDate())
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                    }
+                    Text(date.formattedTime())
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .padding(.vertical, 2)
+    }
+}
+
+extension View {
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
 }

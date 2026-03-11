@@ -8,54 +8,59 @@
 import SwiftUI
 
 struct SetsList: View {
-    
-    @ObservedObject var trainSets = TrainSets()
-   
-    
-    @State var popoverShown = false
-    
-    @State var searchText = ""
-    
-    var body: some View {
-        
-        NavigationView {
-            
-            List {
-                    
-                ForEach(trainSets.sets, content: { set in
-                        
-                    NavigationLink(destination: SetTrainList(set: set).environmentObject(trainSets)) {
-                            
-                        SetsListItem(set: set)
-                            
-                    }
-                        
-                        
-                })
-                
-            }
-            
-            #if os(watchOS)
-            .listStyle(.automatic)
-            #else
-            .listStyle(.insetGrouped)
-            #endif
-            
-            
-            .navigationTitle("Trains")
-     
-            
-        }
-        
-    }
-    
-   
-    
-    
-}
 
-struct SetsList_Previews: PreviewProvider {
-    static var previews: some View {
-        SetsList()
+    @ObservedObject private var store = FleetStore.shared
+    @ObservedObject private var imageStore = FleetImageStore.shared
+    @State private var searchText = ""
+
+    var body: some View {
+        NavigationStack {
+            List {
+                if store.fleet.sets.isEmpty {
+                    if store.isLoading {
+                        HStack {
+                            Spacer()
+                            ProgressView("Loading fleet data...")
+                            Spacer()
+                        }
+                        .listRowBackground(Color.clear)
+                    } else {
+                        ContentUnavailableView("No Sets", systemImage: "tram.fill",
+                            description: Text("Fleet data couldn't be loaded. Pull to refresh."))
+                            .listRowBackground(Color.clear)
+                    }
+                } else {
+                    Section {
+                        ForEach(filteredSets) { set in
+                            NavigationLink {
+                                SetTrainList(set: set)
+                            } label: {
+                                SetsListItem(
+                                    set: set,
+                                    stats: store.stats.setStats[set.code],
+                                    imageStore: imageStore
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+            .navigationTitle("Trains")
+            .searchable(text: $searchText, prompt: "Search sets")
+            .refreshable {
+                store.load()
+            }
+        }
+    }
+
+    private var filteredSets: [FleetSet] {
+        if searchText.isEmpty {
+            return store.fleet.sets
+        }
+        return store.fleet.sets.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText)
+                || $0.code.localizedCaseInsensitiveContains(searchText)
+        }
     }
 }

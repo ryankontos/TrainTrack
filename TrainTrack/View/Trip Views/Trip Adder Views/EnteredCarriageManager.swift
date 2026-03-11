@@ -8,30 +8,20 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class EnteredCarriageManager: ObservableObject {
-    
-    @Published var enteredText: String = ""
-    @Published var pushTrainInfoView = false
-    
-    @Published var showCamera = false
-    
-    init(camera: Bool) {
-        showCamera = camera
+
+    @Published var enteredText: String = "" {
+        didSet { updateResults() }
     }
-    
+
+    @Published var results = [FleetStore.CarriageLookup]()
+
     func gotFullCarriageCodeExternally(code: String) {
-        
-        DispatchQueue.main.async {
-        
-            self.enteredText = code
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                self.pushTrainInfoView = true
-            }
-        
-        }
-        
-        
+        enteredText = code
     }
-    
+
+    private func updateResults() {
+        results = FleetStore.shared.searchCarriages(prefix: enteredText)
+    }
 }

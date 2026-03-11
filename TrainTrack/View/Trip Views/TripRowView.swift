@@ -8,91 +8,67 @@
 import SwiftUI
 
 struct TripRowView: View {
-    
-    @State var trip: Trip
-    @State var showDate: Bool
-    
-    @State var showTrainName = true
-    @State var showRelativeDate = false
-    
-    let trainLookup = TrainLookup()
-    
+
+    let trip: StoredTrip
+    let showDate: Bool
+
+    @ObservedObject private var store = FleetStore.shared
+
+    private var code: String { trip.carriageCode ?? "Unknown" }
+
+    private var lookup: FleetStore.CarriageLookup? {
+        store.findTrain(byCarriage: code)
+    }
+
     var body: some View {
-        
-        VStack {
-            
-        HStack(spacing: 15) {
-            
-        VStack(alignment: .leading, spacing: 3) {
-            
-            Text(title)
-                .font(Font.system(size: 22, weight: .medium, design: .default))
-            Text(setName)
-                .font(Font.system(size: 16, weight: .regular, design: .default))
-            Text("\(dateString), \(trip.locationName)")
-                .foregroundColor(.secondary)
-                .font(Font.system(size: 15, weight: .regular, design: .default))
-            
-            
-            
-        }
-                
-        Spacer()
-                
-        
-        }
+        HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(Color.accentColor.opacity(0.14))
+                    .frame(width: 42, height: 42)
 
-            
-        }
-        .padding(.vertical, 7)
-        
-    }
-    
-    var title: String {
-        
-        var titleString = trip.carriageCode
-        
-        if showTrainName {
-            
-            if let trainName = trainLookup.findTrain(withCarriage: trip.carriageCode, from: TrainFetcher.shared.trains)?.name {
-                
-                titleString = "\(trainName) - \(titleString)"
-                
+                Image(systemName: "tram.fill")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(.accentColor)
             }
-            
-        }
-        
-        return titleString
-        
-    }
-    
-    var setName: String {
-        
-        if let train = trainLookup.findTrain(withCarriage: trip.carriageCode, from: TrainFetcher.shared.trains), let name = TrainSets.shared.matchSet(to: train)?.setName {
-            
-            return name
-            
-        } else {
-            
-            return "Unknown Set"
-            
-        }
-        
-    }
-    
-    var dateString: String {
-        
-        var dateString = trip.date.formattedTime()
-        
-        if showDate {
-            
-            dateString = "\(trip.date.formattedDate()), \(dateString)"
-            
-        }
-        
-        return dateString
-        
-    }
-    
-}
 
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .lineLimit(1)
+
+                Text(setName)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+
+                Text("\(dateString) • \(trip.locationName ?? "Unknown Location")")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var title: String {
+        if let trainName = lookup?.train.name {
+            return "\(trainName) • \(code)"
+        }
+        return code
+    }
+
+    private var setName: String {
+        lookup?.set.name ?? "Unknown Set"
+    }
+
+    private var dateString: String {
+        guard let date = trip.date else { return "Unknown Time" }
+        if showDate {
+            return "\(date.formattedDate()), \(date.formattedTime())"
+        }
+        return date.formattedTime()
+    }
+}

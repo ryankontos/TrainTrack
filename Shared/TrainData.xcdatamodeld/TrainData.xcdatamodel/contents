@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="AchievementEntity" representedClassName="AchievementEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="metadata" optional="YES" attributeType="String"/>
+        <attribute name="unlockedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="CarriageEntity" representedClassName="CarriageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="trainIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="train" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrainEntity" inverseName="carriages" inverseEntity="TrainEntity"/>
+        <relationship name="trips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TripEntity" inverseName="carriage" inverseEntity="TripEntity"/>
+    </entity>
+    <entity name="SetEntity" representedClassName="SetEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="builder" optional="YES" attributeType="String"/>
+        <attribute name="carriageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="carsPerSet" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="lastRiddenDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="listOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="riddenCarriageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="riddenTrainCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalTripCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="trainCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="yearIntroduced" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="trains" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrainEntity" inverseName="set" inverseEntity="TrainEntity"/>
+    </entity>
+    <entity name="TrainEntity" representedClassName="TrainEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="builder" optional="YES" attributeType="String"/>
+        <attribute name="depot" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String" defaultValueString="active"/>
+        <attribute name="tripCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="carriages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CarriageEntity" inverseName="train" inverseEntity="CarriageEntity"/>
+        <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SetEntity" inverseName="trains" inverseEntity="SetEntity"/>
+    </entity>
+    <entity name="TripEntity" representedClassName="TripEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="locationName" optional="YES" attributeType="String"/>
+        <relationship name="carriage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CarriageEntity" inverseName="trips" inverseEntity="CarriageEntity"/>
+    </entity>
+</model>

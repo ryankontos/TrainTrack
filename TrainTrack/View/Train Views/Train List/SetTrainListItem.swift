@@ -8,96 +8,88 @@
 import SwiftUI
 
 struct SetTrainListItem: View {
-    
-    @State var train: Train
-    
-    @State var color: Color
-    
+
+    let train: FleetTrain
+    let stats: FleetStats.TrainStats?
+    let fleetStats: FleetStats
+
+    private var tripCount: Int { stats?.tripCount ?? 0 }
+    private var riddenCarriageCount: Int { stats?.carriagesRidden ?? 0 }
+    private var totalCarriages: Int { train.carriages.count }
+
     var body: some View {
-
         HStack(alignment: .center, spacing: 12) {
-        
-           Circle()
-            .foregroundColor(circleColor)
-            .frame(width: 47, height: 47, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            .overlay(getOverlay())
-            
-        VStack(alignment: .leading, spacing: 3) {
-           
-            
-            Text(train.name)
-                .font(Font.system(size: 21, weight: .medium, design: .default))
-            Text(tripsString)
-                .font(Font.system(size: 17 , weight: .regular, design: .default))
-                .foregroundColor(.secondary)
-            
-            
-        }
-                
-        Spacer()
-                
-        
-        }
-        .padding(.horizontal, 0)
-        .padding(.vertical, 10)
+            // Status circle
+            ZStack {
+                Circle()
+                    .fill(circleColor)
+                    .frame(width: 44, height: 44)
 
-        
-        
-        
-        
-    }
-    
-    var circleColor: Color {
-        
-        if train.trips.isEmpty {
-            
-            return Color(UIColor.gray).opacity(0.7)
-            
-        } else {
-            
-            return Color(UIColor.systemGreen)
-            
-        }
-        
-        
-    }
-    
+                if tripCount > 0 {
+                    Text("\(tripCount)")
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                } else {
+                    Image(systemName: train.isRetired ? "clock.arrow.circlepath" : "tram")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.white.opacity(0.8))
+                }
+            }
 
-    func getOverlay() -> AnyView {
-        
-        if !train.trips.isEmpty {
-            
-            return AnyView(
-                Image(systemName: "checkmark")
-                    .font(Font.system(size: 19, weight: .medium, design: .default))
-                    .foregroundColor(.white)
-            
-            )
-            
-        } else {
-            
-            return AnyView(EmptyView())
-            
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: 6) {
+                    Text(train.name)
+                        .font(.system(size: 18, weight: .medium))
+
+                    if train.isRetired {
+                        Text(train.status.displayName)
+                            .font(.caption2.bold())
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 1)
+                            .background(.orange.opacity(0.15), in: Capsule())
+                            .foregroundStyle(.orange)
+                    }
+                }
+
+                HStack(spacing: 8) {
+                    Text("\(riddenCarriageCount)/\(totalCarriages) carriages")
+                        .foregroundStyle(.secondary)
+
+                    if !train.depot.isEmpty {
+                        Text("• \(train.depot)")
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+                .font(.subheadline)
+
+                // Mini carriage diagram
+                HStack(spacing: 1) {
+                    ForEach(train.carriages, id: \.self) { code in
+                        let ridden = (fleetStats.carriageTripCounts[code] ?? 0) > 0
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(ridden ? Color.green.opacity(0.7) : Color.gray.opacity(0.25))
+                            .frame(height: 6)
+                    }
+                }
+                .frame(maxWidth: 150)
+
+                if !train.notes.isEmpty {
+                    Text(train.notes)
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                        .lineLimit(1)
+                }
+            }
+
+            Spacer()
         }
-        
+        .padding(.vertical, 6)
+        .opacity(train.isRetired ? 0.6 : 1.0)
     }
-    
-    var tripsString: String {
-        
-        var plural = "Trip"
-        if train.trips.count != 1 {
-            plural += "s"
-        }
-        
-        return "\(train.trips.count) \(plural)"
-        
-        
+
+    private var circleColor: Color {
+        if train.isRetired { return .gray }
+        if tripCount > 0 { return .green }
+        return Color.gray.opacity(0.4)
     }
-    
 }
-
-/*struct SetTrainListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        SetTrainListItem(train: <#Train#>)
-    }
-}*/
