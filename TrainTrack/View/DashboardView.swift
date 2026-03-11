@@ -587,9 +587,6 @@ struct SetOverviewRow: View {
     var body: some View {
         HStack(spacing: 14) {
             TrainSetImageView(setName: set.name, size: 44, imageStore: imageStore)
-                .overlay(
-                    Circle().stroke(progressColor, lineWidth: 2.5)
-                )
 
             VStack(alignment: .leading, spacing: 3) {
                 HStack {
