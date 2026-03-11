@@ -28,6 +28,7 @@ final class FleetStore: ObservableObject {
 
     private let downloader = TrainDataDownloader()
     private var observers = [Any]()
+    private var debounceTask: Task<Void, Never>?
 
     private init() {
         setupObservers()
@@ -116,12 +117,24 @@ final class FleetStore: ObservableObject {
         carriageIndex = index
     }
 
+    /// Debounced stats recompute + achievement evaluation.
+    /// Coalesces rapid-fire iCloud sync notifications into a single update.
+    private func scheduleDebouncedRecompute() {
+        debounceTask?.cancel()
+        debounceTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
+            guard !Task.isCancelled, let self else { return }
+            self.recomputeStats()
+            AchievementManager.shared.evaluateAll(fleet: self.fleet, stats: self.stats)
+        }
+    }
+
     private func setupObservers() {
         guard let cloudKit = TTCloudKit.shared else {
             logger.warning("TTCloudKit not initialized — deferring observers")
             return
         }
-        // Recompute stats when CloudKit changes
+        // Recompute stats when CloudKit changes (debounced for bulk iCloud sync)
         let cloudSave = NotificationCenter.default.addObserver(
             forName: .NSManagedObjectContextDidSave,
             object: cloudKit.persistentContainer.viewContext,
@@ -129,8 +142,7 @@ final class FleetStore: ObservableObject {
         ) { [weak self] notification in
             Task { @MainActor in
                 guard let self, Self.hasStoredTripChanges(notification) else { return }
-                self.recomputeStats()
-                AchievementManager.shared.evaluateAll(fleet: self.fleet, stats: self.stats)
+                self.scheduleDebouncedRecompute()
             }
         }
         observers.append(cloudSave)

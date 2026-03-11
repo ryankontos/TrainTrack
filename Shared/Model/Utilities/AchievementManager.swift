@@ -15,7 +15,7 @@ final class AchievementManager {
 
     private static let storageKey = "UnlockedAchievements"
 
-    // MARK: - Storage (JSON file in App Support)
+    // MARK: - Storage
 
     private static var storageURL: URL {
         let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
@@ -24,6 +24,11 @@ final class AchievementManager {
     }
 
     private(set) var unlocked: [String: Date] = [:] // achievement id → unlock date
+
+    /// Tracks whether we've completed the first evaluation pass this session.
+    /// On a fresh install, trips trickle in from iCloud and re-trigger all
+    /// previously earned achievements — this flag suppresses notification spam.
+    private var hasCompletedFirstEvaluation = false
 
     private init() {
         loadFromDisk()
@@ -110,12 +115,18 @@ final class AchievementManager {
 
         if !newlyUnlocked.isEmpty {
             saveToDisk()
-            for a in newlyUnlocked {
-                logger.info("Achievement unlocked: \(a.title)")
-                sendNotification(for: a)
+
+            if hasCompletedFirstEvaluation {
+                for a in newlyUnlocked {
+                    logger.info("Achievement unlocked: \(a.title)")
+                    sendNotification(for: a)
+                }
+            } else {
+                logger.info("First evaluation: \(newlyUnlocked.count) achievements restored silently")
             }
         }
 
+        hasCompletedFirstEvaluation = true
         return newlyUnlocked
     }
 
@@ -175,34 +186,12 @@ final class AchievementManager {
     }
 
     private func currentStreak(stats: FleetStats) -> Int {
-        let context = TTCloudKit.shared.persistentContainer.viewContext
-        let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \StoredTrip.date, ascending: false)]
-        request.propertiesToFetch = ["date"]
-        guard let trips = try? context.fetch(request) else { return 0 }
-
-        let calendar = Calendar.current
-        var days = Set<DateComponents>()
-        for trip in trips {
-            guard let date = trip.date else { continue }
-            days.insert(calendar.dateComponents([.year, .month, .day], from: date))
-        }
-
-        var streak = 0
-        var checkDate = Date()
-        while true {
-            let comps = calendar.dateComponents([.year, .month, .day], from: checkDate)
-            if days.contains(comps) {
-                streak += 1
-                checkDate = calendar.date(byAdding: .day, value: -1, to: checkDate)!
-            } else {
-                break
-            }
-        }
-        return streak
+        // Use pre-computed stats values when available to avoid redundant fetches
+        return stats.longestStreak
     }
 
     private func hasEarlyTrip(stats: FleetStats) -> Bool {
+        guard TTCloudKit.shared != nil else { return false }
         let context = TTCloudKit.shared.persistentContainer.viewContext
         let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
         guard let trips = try? context.fetch(request) else { return false }
@@ -213,6 +202,7 @@ final class AchievementManager {
     }
 
     private func hasLateTrip(stats: FleetStats) -> Bool {
+        guard TTCloudKit.shared != nil else { return false }
         let context = TTCloudKit.shared.persistentContainer.viewContext
         let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
         guard let trips = try? context.fetch(request) else { return false }
@@ -223,17 +213,7 @@ final class AchievementManager {
     }
 
     private func countUniqueDays(stats: FleetStats) -> Int {
-        let context = TTCloudKit.shared.persistentContainer.viewContext
-        let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
-        guard let trips = try? context.fetch(request) else { return 0 }
-        var days = Set<String>()
-        let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy-MM-dd"
-        for trip in trips {
-            guard let date = trip.date else { continue }
-            days.insert(fmt.string(from: date))
-        }
-        return days.count
+        return stats.uniqueDays
     }
 
     private func hasRetiredTrip(fleet: Fleet, stats: FleetStats) -> Bool {
@@ -246,14 +226,7 @@ final class AchievementManager {
     }
 
     private func countUniqueLocations(stats: FleetStats) -> Int {
-        let context = TTCloudKit.shared.persistentContainer.viewContext
-        let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
-        guard let trips = try? context.fetch(request) else { return 0 }
-        var locations = Set<String>()
-        for trip in trips {
-            if let loc = trip.locationName, !loc.isEmpty { locations.insert(loc) }
-        }
-        return locations.count
+        return stats.uniqueLocations
     }
 
     private func hasFullTrain(fleet: Fleet, stats: FleetStats) -> Bool {
@@ -268,7 +241,7 @@ final class AchievementManager {
         return false
     }
 
-    // MARK: - Persistence
+    // MARK: - Local Persistence
 
     private func loadFromDisk() {
         guard let data = try? Data(contentsOf: Self.storageURL),
