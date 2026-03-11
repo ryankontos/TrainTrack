@@ -120,12 +120,20 @@ struct AllTripsView: View {
                             Button {
                                 sortNewest = true
                             } label: {
-                                Label("Newest First", systemImage: sortNewest ? "checkmark" : "")
+                                HStack {
+                                    Text("Newest First")
+                                    Spacer()
+                                    if sortNewest { Image(systemName: "checkmark") }
+                                }
                             }
                             Button {
                                 sortNewest = false
                             } label: {
-                                Label("Oldest First", systemImage: !sortNewest ? "checkmark" : "")
+                                HStack {
+                                    Text("Oldest First")
+                                    Spacer()
+                                    if !sortNewest { Image(systemName: "checkmark") }
+                                }
                             }
                         }
 
@@ -134,7 +142,11 @@ struct AllTripsView: View {
                             Button {
                                 filterSet = nil
                             } label: {
-                                Label("All Sets", systemImage: filterSet == nil ? "checkmark" : "")
+                                HStack {
+                                    Text("All Sets")
+                                    Spacer()
+                                    if filterSet == nil { Image(systemName: "checkmark") }
+                                }
                             }
                             ForEach(store.fleet.sets) { set in
                                 let count = store.stats.setStats[set.code]?.tripCount ?? 0
@@ -142,7 +154,11 @@ struct AllTripsView: View {
                                     Button {
                                         filterSet = set.code
                                     } label: {
-                                        Label("\(set.name) (\(count))", systemImage: filterSet == set.code ? "checkmark" : "")
+                                        HStack {
+                                            Text("\(set.name) (\(count))")
+                                            Spacer()
+                                            if filterSet == set.code { Image(systemName: "checkmark") }
+                                        }
                                     }
                                 }
                             }
@@ -161,7 +177,7 @@ struct AllTripsView: View {
                 }
             }
         }
-        .environment(\.managedObjectContext, TTCloudKit.shared.persistentContainer.viewContext)
+        // managedObjectContext is injected from SceneDelegate
     }
 
     // MARK: - Stats Header

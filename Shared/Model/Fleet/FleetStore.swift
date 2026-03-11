@@ -57,11 +57,15 @@ final class FleetStore: ObservableObject {
     // MARK: - Stats
 
     func recomputeStats() {
-        let context = TTCloudKit.shared.persistentContainer.viewContext
+        guard let cloudKit = TTCloudKit.shared else {
+            logger.warning("TTCloudKit not initialized yet — skipping stats")
+            return
+        }
+        let context = cloudKit.persistentContainer.viewContext
         let request: NSFetchRequest<StoredTrip> = StoredTrip.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \StoredTrip.date, ascending: false)]
 
-        let archiveId = TTCloudKit.shared.activeArchiveId
+        let archiveId = cloudKit.activeArchiveId
         if let archiveId {
             request.predicate = NSPredicate(format: "archiveId == %@", archiveId as CVarArg)
         } else {
@@ -113,34 +117,40 @@ final class FleetStore: ObservableObject {
     }
 
     private func setupObservers() {
-        // Debounce: recompute stats when CloudKit changes
+        guard let cloudKit = TTCloudKit.shared else {
+            logger.warning("TTCloudKit not initialized — deferring observers")
+            return
+        }
+        // Recompute stats when CloudKit changes
         let cloudSave = NotificationCenter.default.addObserver(
             forName: .NSManagedObjectContextDidSave,
-            object: TTCloudKit.shared.persistentContainer.viewContext,
+            object: cloudKit.persistentContainer.viewContext,
             queue: .main
         ) { [weak self] notification in
-            guard let self, Self.hasStoredTripChanges(notification) else { return }
-            self.recomputeStats()
-            AchievementManager.shared.evaluateAll(fleet: self.fleet, stats: self.stats)
+            Task { @MainActor in
+                guard let self, Self.hasStoredTripChanges(notification) else { return }
+                self.recomputeStats()
+                AchievementManager.shared.evaluateAll(fleet: self.fleet, stats: self.stats)
+            }
         }
         observers.append(cloudSave)
 
         let tripAdded = NotificationCenter.default.addObserver(
             forName: .tripAdded, object: nil, queue: .main
         ) { [weak self] _ in
-            self?.recomputeStats()
+            Task { @MainActor in self?.recomputeStats() }
         }
         observers.append(tripAdded)
 
         let archiveChanged = NotificationCenter.default.addObserver(
             forName: .archiveChanged, object: nil, queue: .main
         ) { [weak self] _ in
-            self?.recomputeStats()
+            Task { @MainActor in self?.recomputeStats() }
         }
         observers.append(archiveChanged)
     }
 
-    private static func hasStoredTripChanges(_ notification: Notification) -> Bool {
+    private nonisolated static func hasStoredTripChanges(_ notification: Notification) -> Bool {
         guard let userInfo = notification.userInfo else { return false }
         let keys = [NSInsertedObjectsKey, NSUpdatedObjectsKey, NSDeletedObjectsKey]
         let changed = keys.compactMap { userInfo[$0] as? Set<NSManagedObject> }.flatMap { $0 }

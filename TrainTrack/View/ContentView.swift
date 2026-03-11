@@ -42,27 +42,24 @@ struct ContentView: View {
                 }
                 .tag(3)
         }
-        .safeAreaInset(edge: .bottom) {
-            HStack {
-                Spacer()
-                Button {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    showingNewTrip = true
-                } label: {
-                    ZStack {
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 56, height: 56)
-                            .shadow(color: .blue.opacity(0.3), radius: 8, y: 4)
+        .overlay(alignment: .bottomTrailing) {
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                showingNewTrip = true
+            } label: {
+                ZStack {
+                    Circle()
+                        .fill(.blue)
+                        .frame(width: 56, height: 56)
+                        .shadow(color: .blue.opacity(0.3), radius: 8, y: 4)
 
-                        Image(systemName: "plus")
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundColor(.white)
-                    }
+                    Image(systemName: "plus")
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundColor(.white)
                 }
-                .padding(.bottom, 60)
-                .padding(.trailing, 20)
             }
+            .padding(.trailing, 20)
+            .padding(.bottom, 90)
         }
         .sheet(isPresented: $showingNewTrip) {
             NavigationStack {

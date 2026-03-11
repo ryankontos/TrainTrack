@@ -54,7 +54,7 @@ final class ArchiveManager: ObservableObject {
         let defaultCount = countTrips(for: nil)
         let defaultArchive = ArchiveInfo(
             id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
-            name: "Default",
+            name: "Original Trips",
             createdDate: .distantPast,
             isActive: TTCloudKit.shared.activeArchiveId == nil,
             tripCount: defaultCount
