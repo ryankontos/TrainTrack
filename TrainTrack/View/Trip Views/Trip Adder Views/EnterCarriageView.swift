@@ -119,7 +119,6 @@ struct EnterCarriageView: View {
                         ResultRow(result: result, stats: store.stats, imageStore: imageStore) {
                             logCode(result.train.carriages[result.position])
                         }
-                        Divider().padding(.leading, 68)
                     }
                 }
             }
