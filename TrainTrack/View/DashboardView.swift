@@ -160,8 +160,6 @@ struct DashboardView: View {
                 DayOfWeekChart(data: s.tripsByDayOfWeek)
             }
 
-            Divider()
-
             // Peak time & busiest day
             HStack(spacing: 16) {
                 VStack(spacing: 2) {
@@ -440,17 +438,16 @@ struct MiniStatCard: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
 
-            if let p = progress {
-                ProgressView(value: p)
-                    .tint(color)
-                    .scaleEffect(y: 1.5)
-            }
+            ProgressView(value: progress ?? 0)
+                .tint(color)
+                .scaleEffect(y: 1.5)
+                .opacity(progress != nil ? 1 : 0)
 
             Text(label)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.vertical, 14)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
     }
@@ -516,6 +513,7 @@ struct RecordCard: View {
 
             Spacer(minLength: 0)
         }
+        .frame(maxHeight: .infinity, alignment: .center)
         .padding(12)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
     }
