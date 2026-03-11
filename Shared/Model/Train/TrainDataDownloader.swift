@@ -40,7 +40,7 @@ struct ParsedTrain: Codable {
 
 final class TrainDataDownloader {
 
-    private static let fleetURL = "https://nswtrains.fandom.com/wiki/List_of_Sydney_Trains/NSW_TrainLink_fleets"
+    private static let fleetAPIURL = "https://nswtrains.fandom.com/api.php?action=parse&page=List_of_Sydney_Trains/NSW_TrainLink_fleets&format=json&prop=text"
     private static let cacheMaxAge: TimeInterval = 7 * 24 * 60 * 60
 
     // MARK: - File Paths
@@ -76,35 +76,45 @@ final class TrainDataDownloader {
             return cached
         }
 
-        guard let url = URL(string: Self.fleetURL) else {
-            logger.error("Invalid fleet URL")
+        guard let url = URL(string: Self.fleetAPIURL) else {
+            logger.error("Invalid fleet API URL")
             return []
         }
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 15
+        request.timeoutInterval = 20
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                logger.error("Fleet download returned invalid response")
-                return []
+                logger.error("Fleet API returned invalid response")
+                return loadCachedTrains() ?? []
             }
 
-            let parsed = parseHTML(data: data)
+            // Parse JSON wrapper: { "parse": { "text": { "*": "<html>..." } } }
+            guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let parse = json["parse"] as? [String: Any],
+                  let text = parse["text"] as? [String: Any],
+                  let htmlString = text["*"] as? String,
+                  let htmlData = htmlString.data(using: .utf8) else {
+                logger.error("Failed to extract HTML from API response")
+                return loadCachedTrains() ?? []
+            }
+
+            let parsed = parseHTML(data: htmlData)
 
             if !parsed.isEmpty {
                 saveToCache(parsed)
-                logger.info("Fetched and cached \(parsed.count) trains from wiki")
+                logger.info("Fetched and cached \(parsed.count) trains from wiki API")
             } else {
-                logger.warning("Wiki parse returned empty — page structure may have changed")
+                logger.warning("Wiki API parse returned empty — page structure may have changed")
             }
 
             return parsed
         } catch {
-            logger.error("Fleet download failed: \(error.localizedDescription)")
-            return []
+            logger.error("Fleet API request failed: \(error.localizedDescription)")
+            return loadCachedTrains() ?? []
         }
     }
 
