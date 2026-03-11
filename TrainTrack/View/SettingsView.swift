@@ -8,12 +8,34 @@ import SwiftUI
 struct SettingsView: View {
 
     @StateObject private var archiveManager = ArchiveManager.shared
+    @ObservedObject private var store = FleetStore.shared
     @State private var showingNewArchive = false
     @State private var newArchiveName = ""
+    @State private var showingRefreshAlert = false
+
+    private var fleetInfo: String {
+        let f = store.fleet
+        guard !f.sets.isEmpty else { return "Not loaded" }
+        return "\(f.totalTrains) trains · \(f.totalCarriages) carriages"
+    }
 
     var body: some View {
         NavigationStack {
             List {
+                // Quick stats summary
+                if store.stats.totalTrips > 0 {
+                    Section {
+                        HStack(spacing: 0) {
+                            QuickStat(value: "\(store.stats.totalTrips)", label: "Trips", icon: "number", color: .blue)
+                            QuickStat(value: "\(store.stats.trainsRidden)", label: "Trains", icon: "train.side.front.car", color: .green)
+                            QuickStat(value: "\(store.stats.carriagesRidden)", label: "Cars", icon: "train.side.middle.car", color: .cyan)
+                            QuickStat(value: "\(store.stats.currentStreak)", label: "Streak", icon: "flame.fill", color: .orange)
+                        }
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets())
+                    }
+                }
+
                 // Achievements
                 Section {
                     NavigationLink {
@@ -55,10 +77,10 @@ struct SettingsView: View {
                 } header: {
                     Text("Archives")
                 } footer: {
-                    Text("Archives let you freeze your trip history and start fresh. Switch between archives to compare different periods.")
+                    Text("Archives let you freeze your trip history and start fresh. Switch between archives to compare different time periods.")
                 }
 
-                // Export
+                // Data
                 Section("Data") {
                     Button {
                         CSVExporter.exportTrips()
@@ -67,27 +89,28 @@ struct SettingsView: View {
                     }
 
                     Button {
-                        FleetStore.shared.load()
+                        store.load()
+                        showingRefreshAlert = true
                     } label: {
                         Label("Refresh Fleet Data", systemImage: "arrow.clockwise")
                     }
                 }
 
-                // About
-                Section("About") {
-                    HStack {
-                        Text("Fleet Data")
-                        Spacer()
-                        Text("NSW Trains Wiki")
-                            .foregroundStyle(.secondary)
-                    }
+                // Fleet info
+                Section("Fleet Data") {
+                    LabeledContent("Source", value: "NSW Trains Wiki")
+                    LabeledContent("Fleet Types", value: "\(store.fleet.sets.count)")
+                    LabeledContent("Total Trains", value: "\(store.fleet.totalTrains)")
+                    LabeledContent("Active", value: "\(store.fleet.activeTrains)")
+                    LabeledContent("Retired", value: "\(store.fleet.retiredTrains)")
+                    LabeledContent("Total Carriages", value: "\(store.fleet.totalCarriages)")
+                }
 
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "—")
-                            .foregroundStyle(.secondary)
-                    }
+                // App info
+                Section("About") {
+                    LabeledContent("Version", value: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "—")
+                    LabeledContent("Build", value: Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "—")
+                    LabeledContent("Sync", value: "iCloud")
                 }
             }
             .listStyle(.insetGrouped)
@@ -104,7 +127,34 @@ struct SettingsView: View {
             } message: {
                 Text("Your current trips will be preserved. New trips will go into the new archive.")
             }
+            .alert("Fleet Refreshed", isPresented: $showingRefreshAlert) {
+                Button("OK") {}
+            } message: {
+                Text(fleetInfo)
+            }
         }
+    }
+}
+
+private struct QuickStat: View {
+    let value: String
+    let label: String
+    let icon: String
+    let color: Color
+
+    var body: some View {
+        VStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.caption)
+                .foregroundStyle(color)
+            Text(value)
+                .font(.system(size: 18, weight: .bold, design: .rounded))
+            Text(label)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 10)
     }
 }
 
@@ -134,9 +184,19 @@ struct ArchiveRow: View {
                         }
                     }
 
-                    Text("\(archive.tripCount) trips")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 8) {
+                        Text("\(archive.tripCount) trips")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        if archive.createdDate != .distantPast {
+                            Text("·")
+                                .foregroundStyle(.quaternary)
+                            Text("Created \(archive.createdDate.userFriendlyRelativeString())")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
                 }
 
                 Spacer()

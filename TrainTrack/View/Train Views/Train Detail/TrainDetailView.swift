@@ -31,6 +31,11 @@ struct TrainDetailView: View {
         return (try? context.fetch(request)) ?? []
     }
 
+    private var completionPct: Double {
+        guard let s = trainStats, train.carriages.count > 0 else { return 0 }
+        return Double(s.carriagesRidden) / Double(train.carriages.count)
+    }
+
     var body: some View {
         List {
             // Header
@@ -39,9 +44,18 @@ struct TrainDetailView: View {
                     .listRowBackground(Color.clear)
             }
 
+            // Stats overview
+            if let s = trainStats, s.tripCount > 0 {
+                Section {
+                    statsGrid(s)
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets())
+                }
+            }
+
             // Visual carriage diagram
             if !train.carriages.isEmpty {
-                Section("Carriages") {
+                Section("Carriages (\(trainStats?.carriagesRidden ?? 0)/\(train.carriages.count) ridden)") {
                     carriageDiagram
                         .listRowBackground(Color.clear)
 
@@ -59,9 +73,18 @@ struct TrainDetailView: View {
                 if !train.builder.isEmpty {
                     LabeledContent("Builder", value: train.builder)
                 }
-                LabeledContent("Status", value: train.status.displayName)
+                LabeledContent("Status") {
+                    HStack(spacing: 4) {
+                        Image(systemName: train.status.icon)
+                            .font(.caption)
+                        Text(train.status.displayName)
+                    }
+                    .foregroundStyle(train.isRetired ? .orange : .green)
+                }
                 LabeledContent("Set", value: set.name)
+                LabeledContent("Network", value: set.networkLine)
                 LabeledContent("Cars", value: "\(train.carriages.count)")
+                LabeledContent("Introduced", value: "\(set.yearIntroduced)")
                 if !train.notes.isEmpty {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Notes")
@@ -73,11 +96,37 @@ struct TrainDetailView: View {
                 }
             }
 
-            // Trips
+            // Trip timeline
             if !trips.isEmpty {
-                Section("Trips (\(trips.count))") {
+                Section("Trip History (\(trips.count))") {
+                    // Trip frequency info
+                    if let first = trainStats?.firstRiddenDate, let last = trainStats?.lastRiddenDate {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text("First ridden")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                Text(first.formattedDate())
+                                    .font(.caption)
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing, spacing: 1) {
+                                Text("Last ridden")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                Text(last.formattedDate())
+                                    .font(.caption)
+                            }
+                        }
+                        .padding(.vertical, 2)
+                    }
+
                     ForEach(trips.prefix(50), id: \.objectID) { trip in
-                        StoredTripRow(trip: trip, showDate: true)
+                        NavigationLink {
+                            TripInfoView(trip: trip)
+                        } label: {
+                            StoredTripRow(trip: trip, showDate: true)
+                        }
                     }
 
                     if trips.count > 50 {
@@ -85,6 +134,14 @@ struct TrainDetailView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
+                }
+            }
+
+            // Share
+            Section {
+                let text = "🚂 \(train.name) (\(set.name))\n\(trainStats?.tripCount ?? 0) trips, \(trainStats?.carriagesRidden ?? 0)/\(train.carriages.count) carriages ridden\nTracked with TrainTrack"
+                ShareLink(item: text) {
+                    Label("Share Train", systemImage: "square.and.arrow.up")
                 }
             }
         }
@@ -119,23 +176,67 @@ struct TrainDetailView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                overviewText
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
+                // Completion bar
+                HStack(spacing: 8) {
+                    ProgressView(value: completionPct)
+                        .tint(completionPct >= 1.0 ? .green : .blue)
+                    Text("\(Int(completionPct * 100))%")
+                        .font(.caption.bold().monospacedDigit())
+                        .foregroundStyle(completionPct >= 1.0 ? .green : .secondary)
+                }
             }
 
             Spacer()
         }
     }
 
-    private var overviewText: some View {
-        Group {
-            if let s = trainStats, s.tripCount > 0 {
-                Text("\(s.tripCount) trips • \(s.carriagesRidden)/\(train.carriages.count) carriages ridden")
-            } else {
-                Text("No trips logged on this train yet.")
+    // MARK: - Stats Grid
+
+    private func statsGrid(_ s: FleetStats.TrainStats) -> some View {
+        HStack(spacing: 0) {
+            VStack(spacing: 2) {
+                Text("\(s.tripCount)")
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(.blue)
+                Text("Trips")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
             }
+            .frame(maxWidth: .infinity)
+
+            VStack(spacing: 2) {
+                Text("\(s.carriagesRidden)/\(s.totalCarriages)")
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(.green)
+                Text("Carriages")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+
+            VStack(spacing: 2) {
+                let uniqueLocations = Set(trips.compactMap(\.locationName).filter { !$0.isEmpty }).count
+                Text("\(uniqueLocations)")
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(.orange)
+                Text("Locations")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+
+            VStack(spacing: 2) {
+                let uniqueDays = Set(trips.compactMap(\.date).map { Calendar.current.startOfDay(for: $0) }).count
+                Text("\(uniqueDays)")
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(.purple)
+                Text("Days")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity)
         }
+        .padding(.vertical, 10)
     }
 
     // MARK: - Carriage Diagram
@@ -180,10 +281,14 @@ struct TrainDetailView: View {
             Text(code)
                 .font(.subheadline.monospaced())
 
+            Text("Car \(position + 1)")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+
             Spacer()
 
             if tripCount > 0 {
-                Text("\(tripCount) trips")
+                Text("\(tripCount) trip\(tripCount == 1 ? "" : "s")")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             } else {

@@ -13,6 +13,7 @@ struct TripRowView: View {
     let showDate: Bool
 
     @ObservedObject private var store = FleetStore.shared
+    @ObservedObject private var imageStore = FleetImageStore.shared
 
     private var code: String { trip.carriageCode ?? "Unknown" }
 
@@ -22,53 +23,50 @@ struct TripRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            ZStack {
-                Circle()
-                    .fill(Color.accentColor.opacity(0.14))
-                    .frame(width: 42, height: 42)
+            TrainSetImageView(setName: lookup?.set.name ?? "Unknown", size: 42, imageStore: imageStore)
 
-                Image(systemName: "tram.fill")
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundColor(.accentColor)
-            }
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: 6) {
+                    Text(lookup?.train.name ?? code)
+                        .font(.subheadline.bold())
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.headline)
-                    .lineLimit(1)
+                    Text(code)
+                        .font(.caption.monospaced())
+                        .foregroundStyle(.secondary)
+                }
 
-                Text(setName)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
+                HStack(spacing: 4) {
+                    Text(lookup?.set.name ?? "Unknown Set")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
 
-                Text("\(dateString) • \(trip.locationName ?? "Unknown Location")")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
+                    if let loc = trip.locationName, !loc.isEmpty {
+                        Text("·")
+                            .foregroundStyle(.quaternary)
+                        Text(loc)
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+                .lineLimit(1)
             }
 
             Spacer(minLength: 0)
-        }
-        .padding(.vertical, 4)
-    }
 
-    private var title: String {
-        if let trainName = lookup?.train.name {
-            return "\(trainName) • \(code)"
-        }
-        return code
-    }
+            if let date = trip.date {
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text(date.formattedTime())
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(.secondary)
 
-    private var setName: String {
-        lookup?.set.name ?? "Unknown Set"
-    }
-
-    private var dateString: String {
-        guard let date = trip.date else { return "Unknown Time" }
-        if showDate {
-            return "\(date.formattedDate()), \(date.formattedTime())"
+                    if showDate {
+                        Text(date.userFriendlyRelativeString())
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+            }
         }
-        return date.formattedTime()
+        .padding(.vertical, 3)
     }
 }

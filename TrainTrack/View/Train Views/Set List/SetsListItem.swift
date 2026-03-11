@@ -40,14 +40,17 @@ struct SetsListItem: View {
                     Spacer()
 
                     if let s = stats, s.tripCount > 0 {
-                        Text("\(s.tripCount) trips")
-                            .font(.caption.monospacedDigit())
+                        Text("\(s.tripCount)")
+                            .font(.subheadline.bold().monospacedDigit())
+                            .foregroundStyle(.blue)
+                        + Text(" trips")
+                            .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                 }
 
                 HStack(spacing: 6) {
-                    Text("\(stats?.trainsRidden ?? 0)/\(set.totalTrains) Trains")
+                    Text("\(stats?.trainsRidden ?? 0)/\(set.totalTrains) trains")
                         .font(.subheadline)
 
                     if trainProgress >= 1.0 {
@@ -55,6 +58,12 @@ struct SetsListItem: View {
                             .font(.caption)
                             .foregroundStyle(.green)
                     }
+
+                    Spacer()
+
+                    Text("\(stats?.carriagesRidden ?? 0)/\(set.totalCarriages) cars")
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
                 }
 
                 HStack(spacing: 8) {
@@ -76,7 +85,15 @@ struct SetsListItem: View {
                         Label("\(set.carsPerSet)-car", systemImage: "train.side.front.car")
                     }
 
+                    Label(set.networkLine, systemImage: "network")
+
+                    if set.retiredTrains > 0 {
+                        Label("\(set.retiredTrains) retired", systemImage: "clock.arrow.circlepath")
+                            .foregroundStyle(.orange)
+                    }
+
                     if let lastRidden = stats?.lastRiddenDate {
+                        Spacer()
                         Label(lastRidden.userFriendlyRelativeString(), systemImage: "clock")
                     }
                 }

@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import CoreData
 import UserNotifications
 import os.log
 

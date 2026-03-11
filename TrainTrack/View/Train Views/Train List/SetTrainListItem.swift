@@ -16,14 +16,26 @@ struct SetTrainListItem: View {
     private var tripCount: Int { stats?.tripCount ?? 0 }
     private var riddenCarriageCount: Int { stats?.carriagesRidden ?? 0 }
     private var totalCarriages: Int { train.carriages.count }
+    private var completionPct: Double {
+        totalCarriages > 0 ? Double(riddenCarriageCount) / Double(totalCarriages) : 0
+    }
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            // Status circle
+            // Status circle with completion ring
             ZStack {
                 Circle()
                     .fill(circleColor)
                     .frame(width: 44, height: 44)
+
+                if tripCount > 0 {
+                    // Completion ring overlay
+                    Circle()
+                        .trim(from: 0, to: completionPct)
+                        .stroke(completionPct >= 1.0 ? Color.green : Color.white.opacity(0.5), style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                        .frame(width: 44, height: 44)
+                        .rotationEffect(.degrees(-90))
+                }
 
                 if tripCount > 0 {
                     Text("\(tripCount)")
@@ -49,6 +61,12 @@ struct SetTrainListItem: View {
                             .background(.orange.opacity(0.15), in: Capsule())
                             .foregroundStyle(.orange)
                     }
+
+                    if completionPct >= 1.0 {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.green)
+                    }
                 }
 
                 HStack(spacing: 8) {
@@ -56,7 +74,9 @@ struct SetTrainListItem: View {
                         .foregroundStyle(.secondary)
 
                     if !train.depot.isEmpty {
-                        Text("• \(train.depot)")
+                        Text("·")
+                            .foregroundStyle(.quaternary)
+                        Text(train.depot)
                             .foregroundStyle(.tertiary)
                     }
                 }
@@ -73,11 +93,11 @@ struct SetTrainListItem: View {
                 }
                 .frame(maxWidth: 150)
 
-                if !train.notes.isEmpty {
-                    Text(train.notes)
-                        .font(.caption)
+                // Last ridden date
+                if let last = stats?.lastRiddenDate {
+                    Text(last.userFriendlyRelativeString())
+                        .font(.caption2)
                         .foregroundStyle(.tertiary)
-                        .lineLimit(1)
                 }
             }
 
@@ -89,7 +109,8 @@ struct SetTrainListItem: View {
 
     private var circleColor: Color {
         if train.isRetired { return .gray }
-        if tripCount > 0 { return .green }
+        if completionPct >= 1.0 { return .green }
+        if tripCount > 0 { return .blue }
         return Color.gray.opacity(0.4)
     }
 }

@@ -45,7 +45,7 @@ final class TripManager {
         }
 
         // Location
-        if let location = LocationManager.shared?.lastLocation {
+        if let location = LocationManager.shared?.currentLocation {
             trip.latitude = location.coordinate.latitude
             trip.longitude = location.coordinate.longitude
         }

@@ -24,7 +24,7 @@ struct ContentView: View {
             SetsList()
                 .tabItem {
                     Image(systemName: "tram.fill")
-                    Text("Trains")
+                    Text("Fleet")
                 }
                 .tag(1)
 
@@ -46,6 +46,7 @@ struct ContentView: View {
             HStack {
                 Spacer()
                 Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     showingNewTrip = true
                 } label: {
                     ZStack {

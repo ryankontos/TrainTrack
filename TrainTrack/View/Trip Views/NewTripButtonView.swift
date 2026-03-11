@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewTripButtonView: View {
     
-    @Environment (\.colorScheme) var colorScheme:ColorScheme
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @Binding var toggled: Bool
     

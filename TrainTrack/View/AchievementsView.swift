@@ -9,8 +9,79 @@ struct AchievementsView: View {
 
     @ObservedObject private var store = FleetStore.shared
 
+    private var unlockedCount: Int {
+        AchievementManager.shared.unlocked.count
+    }
+
+    private var totalCount: Int {
+        AchievementManager.all.count
+    }
+
+    private var overallProgress: Double {
+        totalCount > 0 ? Double(unlockedCount) / Double(totalCount) : 0
+    }
+
     var body: some View {
         List {
+            // Overall progress header
+            Section {
+                VStack(spacing: 16) {
+                    ZStack {
+                        Circle()
+                            .stroke(Color.yellow.opacity(0.15), lineWidth: 12)
+                            .frame(width: 100, height: 100)
+
+                        Circle()
+                            .trim(from: 0, to: overallProgress)
+                            .stroke(Color.yellow, style: StrokeStyle(lineWidth: 12, lineCap: .round))
+                            .frame(width: 100, height: 100)
+                            .rotationEffect(.degrees(-90))
+
+                        VStack(spacing: 0) {
+                            Text("\(unlockedCount)")
+                                .font(.system(size: 28, weight: .heavy, design: .rounded))
+                            Text("of \(totalCount)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    Text("\(Int(overallProgress * 100))% Complete")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .listRowBackground(Color.clear)
+            }
+
+            // Next to unlock
+            let nextUp = AchievementManager.all
+                .filter { AchievementManager.shared.unlocked[$0.id] == nil }
+                .compactMap { a -> (AchievementManager.Achievement, Double, Int)? in
+                    let cur = AchievementManager.shared.currentValue(for: a, fleet: store.fleet, stats: store.stats)
+                    let pct = a.target > 0 ? Double(cur) / Double(a.target) : 0
+                    return pct > 0 ? (a, pct, cur) : nil
+                }
+                .sorted { $0.1 > $1.1 }
+                .prefix(3)
+
+            if !nextUp.isEmpty {
+                Section("Almost There") {
+                    ForEach(Array(nextUp), id: \.0.id) { (achievement, progress, current) in
+                        AchievementRow(
+                            achievement: achievement,
+                            unlocked: false,
+                            unlockedDate: nil,
+                            current: current,
+                            target: achievement.target,
+                            highlight: true
+                        )
+                    }
+                }
+            }
+
+            // By category
             ForEach(AchievementManager.Achievement.Category.allCases, id: \.self) { category in
                 let achievements = AchievementManager.all.filter { $0.category == category }
                 Section {
@@ -20,7 +91,8 @@ struct AchievementsView: View {
                             unlocked: AchievementManager.shared.isUnlocked(achievement.id),
                             unlockedDate: AchievementManager.shared.unlockDate(achievement.id),
                             current: AchievementManager.shared.currentValue(for: achievement, fleet: store.fleet, stats: store.stats),
-                            target: achievement.target
+                            target: achievement.target,
+                            highlight: false
                         )
                     }
                 } header: {
@@ -46,6 +118,7 @@ struct AchievementRow: View {
     let unlockedDate: Date?
     let current: Int
     let target: Int
+    let highlight: Bool
 
     private var progress: Double {
         guard target > 0 else { return 0 }
@@ -56,12 +129,20 @@ struct AchievementRow: View {
         HStack(spacing: 14) {
             ZStack {
                 Circle()
-                    .fill(unlocked ? iconColor.opacity(0.15) : Color.gray.opacity(0.08))
+                    .fill(unlocked ? iconColor.opacity(0.15) : (highlight ? iconColor.opacity(0.08) : Color.gray.opacity(0.08)))
                     .frame(width: 48, height: 48)
+
+                if !unlocked && highlight {
+                    Circle()
+                        .trim(from: 0, to: progress)
+                        .stroke(iconColor.opacity(0.4), style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                        .frame(width: 48, height: 48)
+                        .rotationEffect(.degrees(-90))
+                }
 
                 Image(systemName: achievement.icon)
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(unlocked ? iconColor : .gray.opacity(0.4))
+                    .foregroundStyle(unlocked ? iconColor : (highlight ? iconColor.opacity(0.6) : .gray.opacity(0.4)))
             }
 
             VStack(alignment: .leading, spacing: 4) {
